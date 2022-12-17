@@ -612,3 +612,4 @@ cython_debug/
 sonarlint
 
 inventory.yml
+secrets.txt
