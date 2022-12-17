@@ -5,6 +5,12 @@ of kubernetes, gitea and gitops principles.
 
 ## Setup
 
+#### Vaulted Secrets
+
+Within this playbook are ansible-vault encrypted files which require a secret, this should be placed in the `secrets.txt` file in the root of the repository.
+
+Place your text within the `secrets.txt` and run desired playbooks.
+
 #### Copy inventory.example.yml file and add your target servers
 
 ```bash
