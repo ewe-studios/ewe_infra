@@ -1,5 +1,6 @@
-Provided tasks will figure out the correct architecture of target host
-setting correct architecture variable to repo_arch and repo_arch_standard.
+# Provided tasks will figure out the correct architecture
+# of target host setting correct architecture variable to
+# repo_arch and repo_arch_standard.
 ---
 - debug:
     msg: "Running on: {{ansible_architecture}}"
