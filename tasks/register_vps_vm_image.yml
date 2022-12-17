@@ -1,0 +1,18 @@
+- name: create ignite-vps registry directory
+  become_user: "{{login_user}}"
+  file:
+    path: "/home/{{login_user}}/ignite-vps/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - "vm"
+- name: copy server.crt for https
+  become_user: "{{login_user}}"
+  copy:
+    force: yes
+    src: "{{inventory_dir}}/files/ignite/registry.yml"
+    dest: "/home/{{login_user}}/ignite-vps/registry.yaml"
+- name: Register ignite vm for docker_vps_image
+  shell: "ignite image import --ignite-config=/home/{{login_user}}/ignite-vps/registry.yaml localhost:5443/docker_vps_base_image:latest"
+  environment:
+    IGNITE_CONTAINERD_INSECURE_REGISTRIES: "localhost:5000,localhost:5443"

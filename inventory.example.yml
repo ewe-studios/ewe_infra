@@ -1,0 +1,124 @@
+---
+
+home:
+  vars:
+    group_name: "local-host"
+  hosts:
+    localhost:
+      ansible_host: localhost
+
+# delete this if not part of your infra
+dark-coder:
+  vars:
+    group: "code-servers"
+  hosts:
+    dark_mini_1:
+      ansible_host: 192.168.128.20
+      ansible_port: 5606
+      ansible_user: darkstar
+
+dark-master:
+  vars:
+    group_name: "infra-master"
+    appuser: "darkvoid"
+    git_user: "Alexander Ewetumo"
+    git_email: "alex.ewetumo@gmail.com"
+  hosts:
+    dark-mini:
+      ansible_host: 192.168.128.147
+      ansible_port: 5606
+      ansible_user: darkvoid
+
+# delete this if not part of your infra
+dns-slaves:
+  vars:
+    group: "dns-servers"
+  hosts:
+    pi_hole_1:
+      ansible_host: 192.168.128.149
+      ansible_port: 5606
+      ansible_user: ubuntu
+    pi_hole_2:
+      ansible_host: 192.168.128.148
+      ansible_port: 5606
+      ansible_user: ubuntu
+
+# delete this if not part of your infra
+dark-slaves:
+  vars:
+    group: "infra-servers"
+  hosts:
+    slave_1:
+      ansible_host: 192.168.128.90
+      ansible_port: 5606
+      ansible_user: darkvoid
+    slave_2:
+      ansible_host: 192.168.128.100
+      ansible_port: 5606
+      ansible_user: darkvoid
+    slave_3:
+      ansible_host: 192.168.128.159
+      ansible_port: 5606
+      ansible_user: darkvoid
+
+# update this to reflect your movable infra
+infra_relocatable:
+  children:
+    dark-slaves:
+
+# update this to reflect your static home infra servers you wish to use for
+# deployment
+infra_home:
+  children:
+    dark-slaves:
+    dark-master:
+
+# update this to reflect your infra servers you wish to use for
+# firecracker vm deployments
+vm_hosts:
+  children:
+    dark-coder:
+    dark-slaves:
+    dark-master:
+
+# update these to reflect all your servers
+docker_hosts:
+  children:
+    dark-coder:
+    dark-slaves:
+    dns-slaves:
+    dark-master:
+
+# update these to reflect all your servers
+all_hosts:
+  children:
+    dark-coder:
+    dark-slaves:
+    dns-slaves:
+    dark-master:
+
+
+ewe_studio_vps_local:
+  vars:
+    ip_addresses:
+      from: 192.168.128.180
+      t0: 192.168.128.200
+    dns_addresses:
+      - local.ewe-studio.com
+      - www.local.ewe-studio.com
+  children:
+    dark-slaves:
+    dns-slaves:
+    dark-master:
+
+ewe_studio_vps_linode:
+  vars:
+    dns_addresses:
+      - linode.ewe-studio.com
+      - www.linode.ewe-studio.com
+  children:
+
+ewe_studio_vps:
+  children:
+    ewe_studio_vps_local:
+    ewe_studio_vps_linode:

@@ -1,0 +1,52 @@
+- name: install docker-compose via pip
+  become_user: "{{login_user}}"
+  command: "pip install docker-compose"
+- name: Install needed packages
+  package:
+    state: present
+    pkg:
+      - ca-certificates
+      - apache2-utils
+      - curl
+- name: create docker-services directory
+  become_user: "{{login_user}}"
+  file:
+    path: "/home/{{login_user}}/docker-services"
+    mode: "0755"
+    state: directory
+- name: create docker-services registry directory
+  become_user: "{{login_user}}"
+  file:
+    path: "/home/{{login_user}}/docker-services/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - "registry/auth"
+    - "registry/data"
+    - "registry/certs"
+- name: copy docker_registry.docker-compose.yml into host
+  become_user: "{{login_user}}"
+  copy:
+    src: "{{inventory_dir}}/files/compose/docker_registry.compose.yml"
+    dest: "/home/{{login_user}}/docker-services/registry/docker_registry.compose.yml"
+- name: copy server.crt for https
+  become_user: "{{login_user}}"
+  copy:
+    src: "{{inventory_dir}}/files/docker/certs/server.crt"
+    dest: "/home/{{login_user}}/docker-services/registry/certs/server.crt"
+- name: copy server.key for https
+  become_user: "{{login_user}}"
+  copy:
+    src: "{{inventory_dir}}/files/docker/certs/server.key"
+    dest: "/home/{{login_user}}/docker-services/registry/certs/server.key"
+- name: create http password for docker registry
+  become_user: "{{login_user}}"
+  shell: "htpasswd -Bbn docker docker > /home/{{login_user}}/docker-services/registry/auth/htpasswd"
+- name: "Start docker registry for service"
+  become_user: "{{login_user}}"
+  command: "docker-compose --project-directory=/home/{{login_user}}/docker-services/registry --project-name=registry -f /home/{{login_user}}/docker-services/registry/docker_registry.compose.yml up -d --remove-orphans"
+- name: "Add docker registry to docker in host"
+  become_user: "{{login_user}}"
+  command: "docker login -u docker -p docker https://localhost:5443"
+- name: "Add docker registry to docker in host (root)"
+  command: "docker login -u docker -p docker https://localhost:5443"

@@ -1,0 +1,1 @@
+- name: create docker image with target files+kernel

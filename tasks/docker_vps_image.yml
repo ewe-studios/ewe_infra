@@ -1,0 +1,35 @@
+- name: create docker-services directory
+  become_user: "{{login_user}}"
+  file:
+    path: "/home/{{login_user}}/docker-services"
+    mode: "0755"
+    state: directory
+- name: create docker-services registry directory
+  become_user: "{{login_user}}"
+  file:
+    path: "/home/{{login_user}}/docker-services/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - "vps"
+- name: copy docker_registry.docker-compose.yml into host
+  become_user: "{{login_user}}"
+  copy:
+    force: yes
+    src: "{{inventory_dir}}/files/docker/Dockerfile.vps"
+    dest: "/home/{{login_user}}/docker-services/vps/Dockerfile"
+- name: get host ssh pub key
+  set_fact:
+    host_ssh_pub: "{{ lookup('file', host_ssh_file) }}"
+- name: get machine ssh pub key
+  shell: "cat {{ machine_ssh_file }}"
+  register: machine_ssh_pub_command
+- name: get machine ssh pub key content as variable
+  set_fact:
+    machine_ssh_pub: "{{ machine_ssh_pub_command.stdout }}"
+- name: Build docker image using vps dockerfile
+  shell: "docker build --build-arg \"USER_SSH_PUB_KEY='{{ machine_ssh_pub}}' USER_SSH_PUB_KEY2='{{host_ssh_pub}}'\" -t docker_vps_base_image -f /home/{{login_user}}/docker-services/vps/Dockerfile /home/{{login_user}}/docker-services/vps"
+- name: Tag docker image using local docker registry
+  shell: "docker tag docker_vps_base_image:latest localhost:5443/docker_vps_base_image:latest"
+- name: Push docker image to local docker registry
+  shell: "docker push localhost:5443/docker_vps_base_image:latest"
