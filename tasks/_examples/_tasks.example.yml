@@ -536,6 +536,28 @@ ansible-playbook main.yml --ask-vault-pass
 
 ansible-playbook main.yml --vault-password-file {path to file}
 
+## Difference between import_tasks and include_tasks
+- import_tasks copies the task as is but you may loose things like dynamically defined variables
+- include_tasks copies and maintains those dynamically defined varaibles (registers, ..etc)
+
+# Roles
+# This are at minimum a set of ansible tasks placed under a `roles` directory where
+# each directory under specify some reusable roles we can call elsewhere.
+#
+# To use roles, simply type the name of the role under `roles` key in your ansible playbook
+#
+#   roles:
+#     - nodejs
+# you can also include roles under the `tasks` section using `include_role: [role_name]` which is
+# useful to control order, else roles will get executed after the pre-task block and before the playbooks tasks block.
+#
+# See related tasks/_examples folders
+#
+#- roles/
+#-   nodejs/
+#-     meta/main.yaml - describes dependencies (say other roles and related variables, var_files) required by role
+#-     handlers/main.yaml - contains handler tasks we wish to use when import_tasks/include_tasks for handlers
+#-     tasks/main.yaml - contains the actual tasks to be called when role is executed
 
 ## run somethings before tasks (pre-tasks)
 
