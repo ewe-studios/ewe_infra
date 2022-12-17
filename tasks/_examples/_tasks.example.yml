@@ -527,7 +527,24 @@
 vars_file:
   - vars/main.yml
 
-### file lookup
+## run ansible playbook and ask for password for ansible-vault files
+
+ansible-playbook main.yml --ask-vault-pass
+
+# we can use a password file in your $HOME/.ansible or any directory desired
+# and call like so:
+
+ansible-playbook main.yml --vault-password-file {path to file}
+
+
+## run somethings before tasks (pre-tasks)
+
+pre_tasks:
+  - name: say hello
+    command: "echo 'hello'"
+
+
+  ### file lookup
 
 #  It is used for fetching a base64- encoded blob containing the data in a remote file.
 - name: Slurp hosts file
