@@ -1,3 +1,4 @@
+---
 - name: Generate IP address set for youtube
   register: ip_generated_addresses
   delegate_to: localhost

@@ -1,3 +1,4 @@
+---
 - name: select firecracker target architecture
   set_fact:
     firecracker_arch: "{{ 'x86_64' if (repo_arch =='amd64') else 'aarch64' }}"

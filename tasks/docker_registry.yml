@@ -1,3 +1,4 @@
+---
 - name: install docker-compose via pip
   become_user: "{{login_user}}"
   command: "pip install docker-compose"

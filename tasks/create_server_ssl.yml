@@ -1,3 +1,4 @@
+---
 - set_fact:
     subject_name: "{{ domain }}"
 - name: Create 'vps' directory servers

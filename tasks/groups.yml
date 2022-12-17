@@ -1,3 +1,4 @@
+---
 - name: Add fundamental system groups
   group:
     state: present

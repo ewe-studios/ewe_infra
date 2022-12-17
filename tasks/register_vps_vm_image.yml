@@ -1,3 +1,4 @@
+---
 - name: create ignite-vps registry directory
   become_user: "{{login_user}}"
   file:

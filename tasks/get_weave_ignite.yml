@@ -1,3 +1,4 @@
+---
 - name: select weave ignite target architecture
   set_fact:
     ignite_arch: "{{ 'amd64' if (repo_arch == 'amd64') else 'arm64' }}"

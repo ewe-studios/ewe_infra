@@ -1,3 +1,5 @@
+---
+
 - name: Get host ssh public keys
   register: host_ssh_key_files_dict
   find:

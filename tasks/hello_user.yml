@@ -1,3 +1,4 @@
+---
 - name: get user
   command: whoami
   register: "user"
