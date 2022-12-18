@@ -8,6 +8,15 @@
     </content>
     <content url="file://$MODULE_DIR$/../src.formulas">
       <excludeFolder url="file://$MODULE_DIR$/../src.formulas/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-cpp/dev/core_generator/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-cpp/dev/core_generator/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-cpp/dev/core_generator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

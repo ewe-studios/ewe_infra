@@ -541,7 +541,7 @@ ansible-playbook main.yml --vault-password-file {path to file}
 - include_tasks copies and maintains those dynamically defined varaibles (registers, ..etc)
 
 # Roles
-# This are at minimum a set of ansible tasks placed under a `roles` directory where
+# These are at minimum a set of ansible tasks placed under a `roles` directory where
 # each directory under specify some reusable roles we can call elsewhere.
 #
 # To use roles, simply type the name of the role under `roles` key in your ansible playbook
@@ -573,6 +573,7 @@ pre_tasks:
   slurp:
     src: /etc/hosts
   register: slurpfile
+
 - debug: msg="{{ slurpfile['content'] | b64decode }}"
 
 - shell: cat "{{remote_file}}"
@@ -582,6 +583,7 @@ pre_tasks:
   command: cat /path/to/file
   register: filename
   become: true # use case specific option
+  
 - name: viewing the contents
   debug:
     msg: "{{filename.stdout}}"
