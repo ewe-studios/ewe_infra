@@ -583,7 +583,7 @@ pre_tasks:
   command: cat /path/to/file
   register: filename
   become: true # use case specific option
-  
+
 - name: viewing the contents
   debug:
     msg: "{{filename.stdout}}"
