@@ -613,3 +613,4 @@ sonarlint
 
 inventory.yml
 secrets.txt
+.DS_Store
