@@ -8,11 +8,11 @@
   tasks:
     - import_tasks: ../tasks/hello_arch.yml
     - import_tasks: ../tasks/hello_user.yml
-#    - import_tasks: ../tasks/kvm_install.yml
-#    - import_tasks: ../tasks/get_containerd.yml
-#    - import_tasks: ../tasks/get_containerd_cni.yml
-#    - import_tasks: ../tasks/get_firecracker.yml
-#    - import_tasks: ../tasks/get_weave_ignite.yml
+    - import_tasks: ../tasks/kvm_install.yml
+    - import_tasks: ../tasks/get_containerd.yml
+    - import_tasks: ../tasks/get_containerd_cni.yml
+    - import_tasks: ../tasks/get_firecracker.yml
+    - import_tasks: ../tasks/get_weave_ignite.yml
     - import_tasks: ../tasks/docker_registry.yml
     - import_tasks: ../tasks/docker_vps_image.yml
     - import_tasks: ../tasks/register_vps_vm_image.yml

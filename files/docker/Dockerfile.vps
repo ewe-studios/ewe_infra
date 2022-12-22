@@ -34,13 +34,12 @@ RUN mkdir -p /etc/ssh/ssh_user_config/ \
       && echo "${USER_SSH_PUB_KEY2}" >> /root/.ssh/authorized_keys
 
 RUN wget -O /usr/bin/k0s https://github.com/k0sproject/k0s/releases/download/${K0S_VERSION}/k0s-${K0S_VERSION}-${K0S_ARCH} \
-    && wget -O /usr/local/bin/flanneld https://github.com/flannel-io/flannel/releases/download/v0.20.2/flanneld-amd64 \
-    && wget -O /usr/local/bin/etcd.tar.gz https://github.com/etcd-io/etcd/releases/download/v3.4.23/etcd-v3.4.23-linux-amd64.tar.gz \
-    && tar -xvf --strip-components=1 /usr/local/bin/etcd.tar.gz /usr/local/bin/  \
-    && rm -rf /usr/local/bin/etcd.tar.gz /usr/local/bin/Documentation *.md \
     && wget -O /usr/bin/k0sctl https://github.com/k0sproject/k0sctl/releases/download/${K0S_CTL_VERSION}/k0sctl-linux-x64 \
-    && chmod +x /usr/bin/k0s \
-    && chmod +x /usr/bin/k0sctl
+    && wget -O /usr/bin/flanneld https://github.com/flannel-io/flannel/releases/download/v0.20.2/flanneld-amd64 \
+    && wget -O /usr/bin/etcd.tar.gz https://github.com/etcd-io/etcd/releases/download/v3.4.23/etcd-v3.4.23-linux-amd64.tar.gz \
+    && tar -xvf /usr/bin/etcd.tar.gz --strip-components=1 -C /usr/bin/  \
+    && rm -rf /usr/bin/etcd.tar.gz /usr/bin/Documentation *.md \
+    && chmod +x /usr/bin/k0s /usr/bin/k0sctl /usr/bin/flanneld /usr/bin/etcd /usr/bin/etcdctl
 
 
 CMD ["bash"]
