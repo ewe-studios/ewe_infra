@@ -5,6 +5,8 @@
   vars_files:
     - "{{inventory_dir}}/files/vars/package_vars.yml"
     - "{{inventory_dir}}/files/vars/controller_vars.yml"
+    - "{{inventory_dir}}/files/vars/ignite_images.yml"
+    - "{{inventory_dir}}/files/vars/{{vm_var_file}}"
   vars:
   tasks:
     - import_tasks: ../tasks/hello_arch.yml
