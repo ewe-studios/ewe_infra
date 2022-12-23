@@ -3,6 +3,10 @@
   <component name="Go" enabled="true" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$MODULE_DIR$/../docker-apps">
+      <sourceFolder url="file://$MODULE_DIR$/../docker-apps/novnc/config/apache-tomcat-9.0.64/webapps/docs/appdev/sample/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../docker-apps/novnc/config/apache-tomcat-9.0.64/webapps/examples/WEB-INF/classes" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
@@ -18,6 +22,7 @@
       <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/build" />
       <excludeFolder url="file://$MODULE_DIR$/../src.formulas/src.rive/rive-flutter/.pub" />
     </content>
+    <content url="file://$USER_HOME$/dotfiles" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
