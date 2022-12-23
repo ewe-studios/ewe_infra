@@ -29,7 +29,7 @@
       - "'{{ machine_ssh_pub }}' != ''"
       - "'{{ host_ssh_pub }}' != ''"
 - name: Build docker image using vps dockerfile
-  shell: "docker build --build-arg \"USER_SSH_PUB_KEY='{{ machine_ssh_pub}}'\" --build-arg \"USER_SSH_PUB_KEY2='{{host_ssh_pub}}'\" -t machine_image:{{ vps_image_version }} -f /home/{{login_user}}/docker-services/vps/Dockerfile /home/{{login_user}}/docker-services/vps"
+  shell: "docker build --build-arg \"USER_SSH_PUB_KEY={{ machine_ssh_pub}}\" --build-arg \"USER_SSH_PUB_KEY2={{host_ssh_pub}}\" -t machine_image:{{ vps_image_version }} -f /home/{{login_user}}/docker-services/vps/Dockerfile /home/{{login_user}}/docker-services/vps"
 - name: Tag docker image using local docker registry
   shell: "docker tag machine_image:{{ vps_image_version }} localhost:5443/machine_image:{{ vps_image_version }}"
 - name: Push docker image to local docker registry
