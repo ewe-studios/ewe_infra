@@ -1,0 +1,6 @@
+---
+# tasks file for containerd
+- include_tasks: get_containerd.yml
+  when: containerd_installed.rc == 1
+- include_tasks: get_containerd_cni.yml
+  when: containerd_installed.rc == 1

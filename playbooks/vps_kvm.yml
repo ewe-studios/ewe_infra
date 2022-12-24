@@ -1,0 +1,29 @@
+---
+- gather_facts: true
+  become: yes
+  hosts: "{{ metal_master | default('metal_master') }}"
+  vars_files:
+    - "{{inventory_dir}}/vars/package_vars.yml"
+    - "{{inventory_dir}}/vars/controller_vars.yml"
+    - "{{inventory_dir}}/vars/ignite_images.yml"
+    - "{{inventory_dir}}/vars/{{vm_var_file}}"
+  vars:
+  roles:
+    - role: ewe.infra.hello
+    - role: ewe.infra.machine_ssh
+    - role: ewe.infra.controller_ssh
+    - role: ewe.infra.kvm
+    - role: ewe.infra.docker
+    - role: ewe.infra.docker_compose
+    - role: ewe.infra.containerd
+    - role: ewe.infra.firecracker
+    - role: ewe.infra.ignite
+    - role: ewe.infra.ignite_image
+  tasks:
+#    - import_tasks: ../tasks/get_containerd.yml
+#    - import_tasks: ../tasks/get_containerd_cni.yml
+#    - import_tasks: ../tasks/get_firecracker.yml
+#    - import_tasks: ../tasks/get_weave_ignite.yml
+#    - import_tasks: ../tasks/docker_registry.yml
+#    - import_tasks: ../tasks/docker_ignite_image.yml
+#    - import_tasks: ../tasks/ignite_image_import.yml

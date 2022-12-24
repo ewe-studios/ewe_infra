@@ -1,8 +1,0 @@
----
-- name: get user
-  command: whoami
-  register: "user"
-- name: say hello user
-  command: "echo 'Hello {{user.stdout}}'"
-- set_fact:
-    user_name: "{{user.stdout}}"

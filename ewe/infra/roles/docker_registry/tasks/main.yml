@@ -1,0 +1,11 @@
+---
+# tasks file for docker_registry
+- name: Check if giving docker registry is present
+  ignore_errors: yes
+  registry: registry_exists
+- name: Check if giving docker registry is running
+  ansible.builtin.shell: "docker inspect registry_registry_1 -f "{{.State.Running}}""
+  ignore_errors: yes
+  registry: registry_status
+- include_tasks: docker_registry.yml
+  when: is_registry_running

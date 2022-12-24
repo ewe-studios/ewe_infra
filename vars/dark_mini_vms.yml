@@ -1,0 +1,19 @@
+---
+vps_image_version: 0.0.2
+vms:
+  - vm_name: "master1"
+    vm_cpu: 2
+    vm_memory: 2G
+    vm_disk: 2.50GB
+    vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
+    owner_tag: "machine"
+    owner_name: "{{ ansible_hostname }}"
+    labels:
+      - name: "group"
+        value: "controller"
+      - name: "desc"
+        value: "controller vm for infrastructure in master1"
+    annotations:
+      - name: "group"
+        value: "controller"
+

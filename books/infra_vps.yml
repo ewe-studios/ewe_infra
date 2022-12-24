@@ -1,4 +1,0 @@
----
-- import_playbook: "../plays/docker.yml"
-- import_playbook: "../plays/firecracker.yml"
-- import_playbook: "../plays/vps_ssl.yml"
