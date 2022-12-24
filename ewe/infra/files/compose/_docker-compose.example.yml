@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
     environment:
       - HOST_OS=Unraid
-      - API_KEY=2CQYLDByuhYCokv65BjMIUg8MuvzKR8yVwCftqtK
+      - API_KEY=
       - ZONE=ewe-studios.com
       - SUBDOMAIN=dynamic
       - PROXIED=false
@@ -104,7 +104,7 @@ services:
       - HOST_OS=Unraid
       - TZ=Asia/HongKong
       - SUBDOMAINS=ewe-studios.duckdns.org
-      - TOKEN=c9318bfb-defa-445f-88fe-c3cf387b3299
+      - TOKEN=
       - LOG_FILE=true
       - UMASK=022
     volumes:
@@ -117,10 +117,10 @@ services:
       - PUID=99
       - PGID=100
       - HOST_OS=Unraid
-      - MYSQL_ROOT_PASSWORD=*craft
+      - MYSQL_ROOT_PASSWORD=
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=darkvoid
-      - MYSQL_PASSWORD=*craft
+      - MYSQL_PASSWORD=
       - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql
       - UMASK=022
     ports:
@@ -160,14 +160,14 @@ services:
       - TZ=Asia/HongKong
       - VPN_ENABLED=yes
       - VPN_USER=p3982594
-      - VPN_PASS=ZTXe2GFQIm7j4Xzv10iMS41orLqqj
+      - VPN_PASS=
       - VPN_PROV=pia
       - VPN_CLIENT=openvpn
       - VPN_OPTIONS=
       - LAN_NETWORK=192.168.128.0/24
       - NAME_SERVERS=84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1,192.168.128.1
       - SOCKS_USER=darkvoid
-      - SOCKS_PASS=x56aJ1H60*7j6GCX%af6&FfAqQUewl!f5z*qvjZc
+      - SOCKS_PASS=
       - ENABLE_SOCKS=yes
       - ENABLE_PRIVOXY=yes
       - VPN_INPUT_PORTS=8081,6789,8989,9897,8112,58846,58946
@@ -324,7 +324,7 @@ services:
       PUID: 1000
       PGID: 100
       VERSION: "docker"
-      PLEX_CLAIM: "claim-dUeBAJftdtvxktmNZYzf"
+      PLEX_CLAIM: ""
     ports:
       - "1900:1900/udp"
       - "32400:32400"
