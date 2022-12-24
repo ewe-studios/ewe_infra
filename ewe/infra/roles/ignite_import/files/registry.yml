@@ -8,5 +8,5 @@ spec:
   registryConfigDir: /home/darkvoid/.docker
   vmDefaults:
     memory: 2GB
-    diskSize: 3GB
+    diskSize: 2.50GB
     cpus: 2
