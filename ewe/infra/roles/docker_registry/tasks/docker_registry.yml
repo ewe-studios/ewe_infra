@@ -9,36 +9,31 @@
       - ca-certificates
       - apache2-utils
       - curl
-- name: create docker-services directory
-  become_user: "{{user_account}}"
-  file:
-    path: "/home/{{user_account}}/docker-services"
-    mode: "0755"
-    state: directory
 - name: create docker-services registry directory
   become_user: "{{user_account}}"
   file:
-    path: "/home/{{user_account}}/docker-services/{{item}}"
+    path: "/home/{{user_account}}/{{item}}"
     mode: "0755"
     state: directory
   loop:
-    - "registry/auth"
-    - "registry/data"
-    - "registry/certs"
+    - "docker-services"
+    - "docker-services/registry/auth"
+    - "docker-services/registry/data"
+    - "docker-services/registry/certs"
 - name: copy docker_registry.docker-compose.yml into host
   become_user: "{{user_account}}"
   copy:
-    src: "{{role_path}}/files/compose/docker_registry.compose.yml"
+    src: "{{role_path}}/files/docker_registry.compose.yml"
     dest: "/home/{{user_account}}/docker-services/registry/docker_registry.compose.yml"
 - name: copy server.crt for https
   become_user: "{{user_account}}"
   copy:
-    src: "{{role_path}}/files/docker/certs/server.crt"
+    src: "{{role_path}}/files/certs/server.crt"
     dest: "/home/{{user_account}}/docker-services/registry/certs/server.crt"
 - name: copy server.key for https
   become_user: "{{user_account}}"
   copy:
-    src: "{{role_path}}/files/docker/certs/server.key"
+    src: "{{role_path}}/files/certs/server.key"
     dest: "/home/{{user_account}}/docker-services/registry/certs/server.key"
 - name: create http password for docker registry
   become_user: "{{user_account}}"

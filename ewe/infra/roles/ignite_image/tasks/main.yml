@@ -1,2 +1,3 @@
 ---
 # tasks file for ignite_image
+- include_tasks: docker_ignite_image.yml
