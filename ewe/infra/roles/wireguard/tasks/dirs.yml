@@ -1,0 +1,10 @@
+---
+- name: create docker-services wireguard directory
+  become_user: "{{user_account}}"
+  file:
+    path: "/home/{{user_account}}/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - "docker-services"
+    - "docker-services/wireguard/{{wireguard_server_name}}"

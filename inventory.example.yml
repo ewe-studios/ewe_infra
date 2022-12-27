@@ -47,13 +47,13 @@ metal_master:
     user_account: darkvoid
     group: "controllers"
     machine_ssh_file: "/home/darkvoid/.ssh/id_rsa.pub"
-    vm_var_file: default_vms.yml
+    vm_var_file: default.vms.yml
   hosts:
     dark-mini:
       ansible_host: 192.168.128.147
       ansible_port: 5606
       ansible_user: darkvoid
-      vm_var_file: dark_mini_vms.yml
+      vm_var_file: dark_mini.vms.yml
 
 # These are slaves metal machines which
 # delete this if not part of your infra

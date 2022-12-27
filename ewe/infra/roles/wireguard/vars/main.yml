@@ -1,2 +1,2 @@
 ---
-# vars file for wireguard
+wireguard_server_name: "srv0"

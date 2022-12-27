@@ -1,5 +1,6 @@
 ---
 vps_image_version: 0.0.2
+wireguard_server_name: "darkmini"
 vms:
   - vm_name: "master1"
     vm_cpu: 2
@@ -8,6 +9,9 @@ vms:
     vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
     owner_tag: "machine"
     owner_name: "{{ ansible_hostname }}"
+    wireguard:
+      allowed_ips:
+      cidr:
     labels:
       - name: "group"
         value: "controller"
