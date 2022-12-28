@@ -1,0 +1,24 @@
+---
+- name: create caddy directory
+  become_user: "{{user_account}}"
+  file:
+    path: "{{ewe_dir}}/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - "caddy2/machine"
+    - "caddy2/machine/data"
+    - "caddy2/machine/sites"
+    - "caddy2/machine/config"
+- name: Copy Caddy.yml file to machine
+  become_user: "{{user_account}}"
+  copy:
+    src: "{{role_path}}/files/{{item.src}}"
+    dest: "{{ewe_dir}}/caddy2/machine/{{item.dest}}"
+  with_items:
+    - { src: "Caddy.yml", dest: "Caddy.yml" }
+    - { src: "Dockerfile", dest: "Dockerfile" }
+- name: Convert caddy.yml file to caddy.json
+  ansible.builtin.shell:
+    cmd: |
+      yq -o=json -P -j {{ewe_dir}}/caddy2/machine/Caddy.yml > {{ewe_dir}}/caddy2/machine/Caddy.json

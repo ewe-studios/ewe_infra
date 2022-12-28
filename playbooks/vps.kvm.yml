@@ -13,6 +13,7 @@
     - role: ewe.infra.machine_ssh
     - role: ewe.infra.controller_ssh
     - role: ewe.infra.kvm
+    - role: ewe.infra.yq
     - role: ewe.infra.docker
     - role: ewe.infra.docker_compose
     - role: ewe.infra.docker_registry

@@ -10,7 +10,7 @@ ARG K0S_ARCH='amd64'
 
 RUN apt-get update \
     && apt-get install -y  fail2ban curl dbus bridge-utils kmod iproute2 iputils-ping tar \
-    zip unzip net-tools wireguard wireguard-tools \
+    zip unzip net-tools \
     openssh-server openssl rng-tools sudo systemd supervisor udev vim-tiny neovim wget \
     apt-transport-https containerd gnupg2 \
     && apt-get clean \

@@ -9,4 +9,4 @@
     - ".ewe_infra/"
 - name: set ewe_infra directory path
   set_fact:
-    ewe_dir: "/home/{{user_account}}/.ewe_infra/"
+    ewe_dir: "/home/{{user_account}}/.ewe_infra"

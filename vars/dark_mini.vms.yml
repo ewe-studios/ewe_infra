@@ -15,8 +15,9 @@ vms:
     owner_tag: "machine"
     owner_name: "{{ ansible_hostname }}"
     wireguard:
-      allowed_ips:
-      cidr:
+      allowed_ips: 10.0.10.0/32
+      ip: 10.0.10.2
+      cidr: 10.0.10.2/24
     labels:
       - name: "group"
         value: "controller"

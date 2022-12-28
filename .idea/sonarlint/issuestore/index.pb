@@ -49,8 +49,6 @@ U
 %ewe/infra/roles/ignite/tasks/main.yml,a/e/ae68dd185f8827933e48a92254828e5a64d86d9e
 i
 9ewe/infra/roles/flannel/files/flannel-network-config.json,4/e/4e84710ab66aa18362fefeb8e79a8d2df1dab4dc
-q
-Aewe/infra/roles/docker_registry/files/docker_registry.compose.yml,2/4/247f0a7c08c3f57d6af2136d540ac1dc5f7959c7
 [
 +ewe/infra/roles/etcd/files/etcd.compose.yml,8/a/8a370db6391cfc15abf0ebd9900a927f80f3b8b6
 a
@@ -67,8 +65,6 @@ Z
 *ewe/infra/roles/hello/tasks/hello_arch.yml,c/5/c5113a5aad90ca74ab2db726a8c221d372d4b460
 S
 #ewe/infra/roles/hello/meta/main.yml,0/7/07c4f5e80573c4da279b1c781f1c820bf5eeac7f
-[
-+ewe/infra/roles/ignite_image/tasks/main.yml,b/3/b3faac8e174d4c386b62b6a4091ea3f8744bdf8e
 Z
 *ewe/infra/roles/ignite_image/meta/main.yml,4/0/40844f1bfa51dc0580e401d4986b01cc3f400d71
 H
@@ -114,8 +110,6 @@ W
 'ewe/infra/roles/system/tasks/groups.yml,c/9/c9628881f6e90e287716ae05058b0423a1a3f6c7
 Z
 *ewe/infra/roles/machine_ssh/tasks/main.yml,2/6/2645d11b057fda05de7b4bf2849ad3948b56daa5
-a
-1ewe/infra/roles/ignite/tasks/get_weave_ignite.yml,5/6/562829a81363f75b8436f2828a5fa7bf8fdd0953
 ]
 -ewe/infra/roles/controller_ssh/tasks/main.yml,2/0/20160ef31874c4c3af1eae57463ba019863d70ad
 ]
@@ -128,8 +122,6 @@ T
 $ewe/infra/roles/docker/meta/main.yml,7/1/71acfcd43527ebb710f2167c0214e34f665a13b1
 U
 %ewe/infra/roles/docker/tasks/main.yml,c/a/ca24366e9f949278cd19f37fa50f1159fc58657f
-i
-9ewe/infra/roles/docker_registry/tasks/docker_registry.yml,4/2/42d2c6073b7d1902663e3613320fa1c25867166b
 W
 'ewe/infra/roles/wireguard/meta/main.yml,2/a/2a2e93fd2c8ea2cbad7b0b99a82d57dfd2dc9850
 X
@@ -142,8 +134,6 @@ Q
 !ewe/infra/roles/cni/meta/main.yml,2/1/21dd5b94bc8c7d2ce223a492e743d17b85e1e8bd
 Y
 )ewe/infra/roles/containerd/tasks/main.yml,4/d/4d3734bc9f315d4835ec5ebdc35f05e1f5c0d400
-`
-0ewe/infra/roles/ignite_import/files/registry.yml,b/5/b59934ac0fbc3913b7fd7c2da053523f0a9fbb1f
 8
 Makefile,8/3/836efb6e25a091dcb4ff8e1dbb2f0be6a5cbf14c
 ;
@@ -182,13 +172,3 @@ T
 $ewe/infra/roles/hello/tasks/main.yml,a/f/af36150658f3cca6191f01845b0d318124b6d9b3
 X
 (ewe/infra/roles/hello/tasks/hello_ip.yml,2/5/25a8e9295f122262603875fe491a2842d5245f5f
-[
-+ewe/infra/roles/hello/tasks/hello_infra.yml,1/7/1714ac9b0b56082623b1b414a7b66a6453d62dbe
-[
-+ewe/infra/roles/wireguard/tasks/get_dir.yml,5/e/5e74b328a23e8feabbafa3d5d9803f5523073c94
-\
-,ewe/infra/roles/wireguard/tasks/packages.yml,d/a/daa3c1acb79350088110e1a06fd6424fd3dce70c
-X
-(ewe/infra/roles/wireguard/tasks/dirs.yml,e/d/ed430d6dd80b4a37d8f3a90a2f97d1229be236d6
-U
-%ewe/infra/roles/caddy2/tasks/main.yml,e/a/ea95eb11392a65327b1558c18a452a65e440154b
