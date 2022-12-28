@@ -1,3 +1,7 @@
 [Interface]
-PrivateKey={{ wg.wg_private_key }}
+PrivateKey={{ wg.private_key }}
 Address={{  wg.cidr }}
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ wg.interface }} -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ wg.interface }} -j MASQUERADE
+
+[Peer]

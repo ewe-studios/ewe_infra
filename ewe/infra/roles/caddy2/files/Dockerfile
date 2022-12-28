@@ -7,7 +7,7 @@ RUN xcaddy build \
     --with github.com/francislavoie/caddy-hcl \
     --with github.com/greenpau/caddy-git \
     --with github.com/caddyserver/jsonc-adapter \
-    --with github.com:abiosoft/caddy-yaml.git \
+    --with github.com/abiosoft/caddy-yaml \
     --with github.com/caddyserver/json5-adapter \
     --with github.com/awoodbeck/caddy-toml-adapter \
     --with github.com/mholt/caddy-ratelimit \

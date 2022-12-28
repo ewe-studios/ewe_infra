@@ -1,23 +1,22 @@
 ---
 vps_image_version: 0.0.2
-wireguard_server_name: "darkmini"
-caddy2:
-  serverIP: 192.168.128.10
-wg:
-  cidr: 10.0.10.0/24
-  serverIP: 10.0.10.1
-vms:
-  - vm_name: "master1"
+
+master1:
+  wg:
+    allowed_ips: 10.0.10.0/32
+    ip: 10.0.10.2
+    cidr: 10.0.10.2/24
+    private_key: "{{ secrets.master1.wg.private_key }}"
+    public_key: "{{ secrets.master1.wg.public_key }}"
+  vm:
+    vm_name: "master1"
     vm_cpu: 2
     vm_memory: 2G
     vm_disk: 2.50GB
     vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
     owner_tag: "machine"
     owner_name: "{{ ansible_hostname }}"
-    wireguard:
-      allowed_ips: 10.0.10.0/32
-      ip: 10.0.10.2
-      cidr: 10.0.10.2/24
+    wg: "{{ master1.wg }}"
     labels:
       - name: "group"
         value: "controller"
@@ -26,4 +25,18 @@ vms:
     annotations:
       - name: "group"
         value: "controller"
+
+caddy2:
+  serverIP: 192.168.128.10
+wg:
+  name: "darkmini0"
+  cidr: 10.0.10.0/24
+  serverIP: 10.0.10.1
+  interface: "enp3s0f0"
+  private_key: "{{ secrets.darkmini0.wg.private_key }}"
+  public_key: "{{ secrets.darkmini0.wg.public_key }}"
+  peers:
+    - "{{ master1.wg }}"
+vms:
+  - "{{ master1.vm }}"
 

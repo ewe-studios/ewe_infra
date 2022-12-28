@@ -7,6 +7,7 @@
     - "{{inventory_dir}}/vars/package_vars.yml"
     - "{{inventory_dir}}/vars/controller_vars.yml"
     - "{{inventory_dir}}/vars/ignite_images.yml"
+    - "{{inventory_dir}}/vars/{{vm_var_secrets_file}}"
     - "{{inventory_dir}}/vars/{{vm_var_file}}"
   roles:
     - role: ewe.infra.hello

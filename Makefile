@@ -24,3 +24,9 @@ deploy_book:
 deploy_play:
 	$(call run_ansible,playbooks/${FILE})
 
+
+encrypt_file:
+	ansible-vault encrypt --vault-password-file ./secrets.txt ${FILE}
+
+reencrypt_file:
+	ansible-vault rekey --vault-password-file ./secrets.txt ${FILE}

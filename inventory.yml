@@ -64,6 +64,7 @@ metal_master:
       ansible_port: 5606
       ansible_user: darkvoid
       vm_var_file: dark_mini.vms.yml
+      vm_var_secrets_file: dark_mini.secrets.yml
 
 # These are slaves metal machines which
 # delete this if not part of your infra

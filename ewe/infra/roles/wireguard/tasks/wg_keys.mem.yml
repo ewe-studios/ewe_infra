@@ -1,0 +1,9 @@
+---
+- name: Create private key for server
+  ansible.builtin.shell: "wg genkey"
+  register: wireguard_private_key_command
+- name: Create public key from private from server for server
+  ansible.builtin.shell: "cat {{ wireguard_private_key_command.stdout }}/private_key | wg pubkey"
+  register: wireguard_public_key_command
+
+
