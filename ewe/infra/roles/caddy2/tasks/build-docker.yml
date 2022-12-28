@@ -1,0 +1,27 @@
+---
+- name: create docker-services directory
+  become_user: "{{user_account}}"
+  file:
+    path: "{{ewe_dir}}"
+    mode: "0755"
+    state: directory
+- name: create docker-services registry directory
+  become_user: "{{user_account}}"
+  file:
+    path: "{{ewe_dir}}/caddy2"
+    mode: "0755"
+    state: directory
+- name: copy docker files to host yml
+  become_user: "{{user_account}}"
+  copy:
+    force: yes
+    src: "{{role_path}}/files/{{item.src}}"
+    dest: "{{ewe_dir}}/vps/{{item.dest}}"
+  loop:
+    - { src: "Dockerfile", dest: "Dockerfile" }
+- name: Build docker image using vps dockerfile
+  shell: "docker build -t machine_caddy:{{ vps_image_version }} -f {{ewe_dir}}/caddy/Dockerfile {{ewe_dir}}/caddy"
+- name: Tag docker image using local docker registry
+  shell: "docker tag machine_caddy:{{ vps_image_version }} localhost:5443/machine_caddy:{{ vps_image_version }}"
+- name: Push docker image to local docker registry
+  shell: "docker push localhost:5443/machine_caddy:{{ vps_image_version }}"

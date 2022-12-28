@@ -1,0 +1,12 @@
+---
+- name: create ewe-infra state directory
+  become_user: "{{user_account}}"
+  file:
+    path: "/home/{{user_account}}/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - ".ewe_infra/"
+- name: set ewe_infra directory path
+  set_fact:
+    ewe_dir: "/home/{{user_account}}/.ewe_infra/"

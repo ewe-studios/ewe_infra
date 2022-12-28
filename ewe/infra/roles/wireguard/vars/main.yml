@@ -1,2 +1,2 @@
 ---
-wireguard_server_name: "srv0"
+# variables here cant be overridden

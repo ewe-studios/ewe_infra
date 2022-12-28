@@ -1,13 +1,13 @@
 ---
-- gather_facts: true
+- hosts: "{{ metal_master | default('metal_master') }}"
+  gather_facts: true
   become: yes
-  hosts: "{{ metal_master | default('metal_master') }}"
+  vars:
   vars_files:
     - "{{inventory_dir}}/vars/package_vars.yml"
     - "{{inventory_dir}}/vars/controller_vars.yml"
     - "{{inventory_dir}}/vars/ignite_images.yml"
     - "{{inventory_dir}}/vars/{{vm_var_file}}"
-  vars:
   roles:
     - role: ewe.infra.hello
     - role: ewe.infra.machine_ssh
@@ -16,10 +16,14 @@
     - role: ewe.infra.docker
     - role: ewe.infra.docker_compose
     - role: ewe.infra.docker_registry
+    - role: ewe.infra.cni
+    - role: ewe.infra.calico
     - role: ewe.infra.containerd
     - role: ewe.infra.firecracker
     - role: ewe.infra.ignite
     - role: ewe.infra.ignite_image
     - role: ewe.infra.ignite_import
+    - role: ewe.infra.wireguard
+    - role: ewe.infra.caddy2
   tasks:
 #    - import_tasks: ../tasks/general_tasks_here.yml

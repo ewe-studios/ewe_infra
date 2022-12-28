@@ -1,6 +1,11 @@
 ---
 vps_image_version: 0.0.2
 wireguard_server_name: "darkmini"
+caddy2:
+  serverIP: 192.168.128.10
+wg:
+  cidr: 10.0.10.0/24
+  serverIP: 10.0.10.1
 vms:
   - vm_name: "master1"
     vm_cpu: 2

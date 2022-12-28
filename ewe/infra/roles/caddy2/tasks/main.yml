@@ -1,0 +1,3 @@
+---
+# tasks file for caddy2
+- include_tasks: build-docker.yml

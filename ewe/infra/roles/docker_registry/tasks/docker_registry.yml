@@ -12,35 +12,34 @@
 - name: create docker-services registry directory
   become_user: "{{user_account}}"
   file:
-    path: "/home/{{user_account}}/{{item}}"
+    path: "{{ewe_dir}}{{item}}"
     mode: "0755"
     state: directory
   loop:
-    - "docker-services"
-    - "docker-services/registry/auth"
-    - "docker-services/registry/data"
-    - "docker-services/registry/certs"
+    - "registry/auth"
+    - "registry/data"
+    - "registry/certs"
 - name: copy docker_registry.docker-compose.yml into host
   become_user: "{{user_account}}"
   copy:
     src: "{{role_path}}/files/docker_registry.compose.yml"
-    dest: "/home/{{user_account}}/docker-services/registry/docker_registry.compose.yml"
+    dest: "{{ewe_dir}}/registry/docker_registry.compose.yml"
 - name: copy server.crt for https
   become_user: "{{user_account}}"
   copy:
     src: "{{role_path}}/files/certs/server.crt"
-    dest: "/home/{{user_account}}/docker-services/registry/certs/server.crt"
+    dest: "{{ewe_dir}}/registry/certs/server.crt"
 - name: copy server.key for https
   become_user: "{{user_account}}"
   copy:
     src: "{{role_path}}/files/certs/server.key"
-    dest: "/home/{{user_account}}/docker-services/registry/certs/server.key"
+    dest: "{{ewe_dir}}/registry/certs/server.key"
 - name: create http password for docker registry
   become_user: "{{user_account}}"
-  shell: "htpasswd -Bbn docker docker > /home/{{user_account}}/docker-services/registry/auth/htpasswd"
+  shell: "htpasswd -Bbn docker docker > {{ewe_dir}}/registry/auth/htpasswd"
 - name: "Start docker registry for service"
   become_user: "{{user_account}}"
-  command: "docker-compose --project-directory=/home/{{user_account}}/docker-services/registry --project-name=registry -f /home/{{user_account}}/docker-services/registry/docker_registry.compose.yml up -d --remove-orphans"
+  command: "docker-compose --project-directory={{ewe_dir}}/registry --project-name=registry -f {{ewe_dir}}/registry/docker_registry.compose.yml up -d --remove-orphans"
 - name: "Add docker registry to docker in host"
   become_user: "{{user_account}}"
   command: "docker login -u docker -p docker https://localhost:5443"

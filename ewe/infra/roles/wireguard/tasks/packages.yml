@@ -6,4 +6,4 @@
       - wireguard
       - wireguard-tools
       - openssl
-      - openssh
+      - openssh-server

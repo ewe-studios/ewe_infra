@@ -3,6 +3,7 @@
   <component name="Go" enabled="true" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$MODULE_DIR$/../books" />
     <content url="file://$MODULE_DIR$/../docker-apps">
       <sourceFolder url="file://$MODULE_DIR$/../docker-apps/novnc/config/apache-tomcat-9.0.64/webapps/docs/appdev/sample/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../docker-apps/novnc/config/apache-tomcat-9.0.64/webapps/examples/WEB-INF/classes" isTestSource="false" />
