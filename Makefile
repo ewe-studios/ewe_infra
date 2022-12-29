@@ -30,3 +30,9 @@ encrypt_file:
 
 reencrypt_file:
 	ansible-vault rekey --vault-password-file ./secrets.txt ${FILE}
+
+encrypt_secrets:
+	ansible-vault encrypt ewe/infra/roles/docker_registry/files/certs/* vars/secrets.yml
+
+decrypt_secrets:
+	ansible-vault decrypt ewe/infra/roles/docker_registry/files/certs/* vars/secrets.yml

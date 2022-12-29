@@ -7,6 +7,7 @@
     - "{{inventory_dir}}/vars/package_vars.yml"
     - "{{inventory_dir}}/vars/controller_vars.yml"
     - "{{inventory_dir}}/vars/ignite_images.yml"
+    - "{{inventory_dir}}/vars/networks.vm.yml"
     - "{{inventory_dir}}/vars/{{vm_var_secrets_file}}"
     - "{{inventory_dir}}/vars/{{vm_var_file}}"
   roles:
@@ -25,7 +26,7 @@
     - role: ewe.infra.ignite
     - role: ewe.infra.ignite_image
     - role: ewe.infra.ignite_import
-    - role: ewe.infra.wireguard
     - role: ewe.infra.caddy2
+    - role: ewe.infra.wireguard
   tasks:
 #    - import_tasks: ../tasks/general_tasks_here.yml

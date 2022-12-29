@@ -2,29 +2,9 @@
 vps_image_version: 0.0.2
 
 master1:
-  wg:
-    allowed_ips: 10.0.10.0/32
-    ip: 10.0.10.2
-    cidr: 10.0.10.2/24
-    private_key: "{{ secrets.master1.wg.private_key }}"
-    public_key: "{{ secrets.master1.wg.public_key }}"
-  vm:
-    vm_name: "master1"
-    vm_cpu: 2
-    vm_memory: 2G
-    vm_disk: 2.50GB
-    vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
-    owner_tag: "machine"
-    owner_name: "{{ ansible_hostname }}"
-    wg: "{{ master1.wg }}"
-    labels:
-      - name: "group"
-        value: "controller"
-      - name: "desc"
-        value: "controller vm for infrastructure in master1"
-    annotations:
-      - name: "group"
-        value: "controller"
+  allowed_ips: 10.0.10.0/32
+  ip: 10.0.10.2
+  cidr: 10.0.10.2/24
 
 caddy2:
   serverIP: 192.168.128.10
@@ -36,7 +16,31 @@ wg:
   private_key: "{{ secrets.darkmini0.wg.private_key }}"
   public_key: "{{ secrets.darkmini0.wg.public_key }}"
   peers:
-    - "{{ master1.wg }}"
+    - allowed_ips: "{{ master1.allowed_ips }}"
+      ip: "{{ master1.ip }}"
+      cidr: "{{ master1.cidr }}"
+      private_key: "{{ secrets.master1.wg.private_key }}"
+      public_key: "{{ secrets.master1.wg.public_key }}"
 vms:
-  - "{{ master1.vm }}"
+  - vm_name: "master1"
+    vm_cpu: 2
+    vm_memory: 2G
+    vm_disk: 2.50GB
+    vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
+    owner_tag: "machine"
+    owner_name: "{{ ansible_hostname }}"
+    wg:
+      allowed_ips: "{{ master1.allowed_ips }}"
+      ip: "{{ master1.ip }}"
+      cidr: "{{ master1.cidr }}"
+      private_key: "{{ secrets.master1.wg.private_key }}"
+      public_key: "{{ secrets.master1.wg.public_key }}"
+    labels:
+      - name: "group"
+        value: "controller"
+      - name: "desc"
+        value: "controller vm for infrastructure in master1"
+    annotations:
+      - name: "group"
+        value: "controller"
 

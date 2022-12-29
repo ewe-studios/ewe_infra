@@ -4,5 +4,4 @@
 - include_tasks: system.yml
 - include_tasks: dirs.yml
 - include_tasks: get_dir.yml
-- include_tasks: wg_keys.yml
-- include_tasks: get_keys.yml
+- include_tasks: wire.yml
