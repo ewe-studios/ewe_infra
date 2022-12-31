@@ -4,7 +4,7 @@ apps:
       hello:
         listen:
           - ":80"
-        "routes":
+        routes:
           - handler:
               - handler: static_response
                 body: "Hello from Caddy on Server!"

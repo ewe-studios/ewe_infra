@@ -1,0 +1,13 @@
+---
+# tasks file for iptables
+- name: uninstall ufw if installed
+  package:
+    purge: true
+    state: absent
+    pkg:
+      - ufw
+- name: install iptables
+  package:
+    state: present
+    pkg:
+      - iptables
