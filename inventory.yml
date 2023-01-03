@@ -40,15 +40,15 @@ metal_dns:
 metal_coder:
   vars:
     machine_ssh_file: "/home/darkstar/.ssh/id_rsa.pub"
-    host_var_file: default.vms.yml
     user_account: "darkstar"
     group: "code-servers"
     role: "client"
   hosts:
-    dark_mini_1:
-      ansible_host: 192.168.128.20
+    dark_coder:
+      ansible_host: 192.168.128.30
       ansible_port: 5606
       ansible_user: darkstar
+      network: darkcoder
 
 # This should be a single server where you will install your load balancer into
 # can be one of your controllers, generally should be one
@@ -57,13 +57,13 @@ metal_master:
     user_account: darkvoid
     group: "controllers"
     machine_ssh_file: "/home/darkvoid/.ssh/id_rsa.pub"
-    host_var_file: default.vms.yml
   hosts:
     dark-mini:
-      ansible_host: 192.168.128.147
+      ansible_host: 192.168.128.50
       ansible_port: 5606
       ansible_user: darkvoid
-      host_var_file: dark_mini.vms.yml
+      network: darkmini
+      host_var_file: dark_mini.yml
       host_secret_file: dark_mini.secrets.yml
 
 # These are slaves metal machines which
@@ -72,37 +72,24 @@ metal_slaves:
   vars:
     group: "infra-servers"
     user_account: "darkvoid"
-    host_var_file: default.vms.yml
     machine_ssh_file: "/home/darkvoid/.ssh/id_rsa.pub"
   hosts:
     slave_1:
-      ansible_host: 192.168.128.90
+      network: slave1
+      ansible_host: 192.168.128.10
       ansible_port: 5606
       ansible_user: darkvoid
       user_account: "darkvoid"
-      host_var_file: slave1.vms.yml
+      host_var_file: slave1.yml
       host_secret_file: slave1.secrets.yml
     slave_2:
-      ansible_host: 192.168.128.100
+      network: slave2
+      ansible_host: 192.168.128.20
       ansible_port: 5606
       ansible_user: darkvoid
       user_account: "darkvoid"
-      host_var_file: slave2.vms.yml
+      host_var_file: slave2.yml
       host_secret_file: slave2.secrets.yml
-    slave_3:
-      ansible_host: 192.168.128.159
-      ansible_port: 5606
-      ansible_user: darkvoid
-      user_account: "darkvoid"
-      host_var_file: slave3.vms.yml
-      host_secret_file: slave3.secrets.yml
-
-# update this to reflect your infra servers you wish to use for
-# firecracker vm deployments
-metal_servers:
-  children:
-    metal_master:
-    metal_slaves:
 
 
 # update these to reflect all your servers

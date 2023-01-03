@@ -1,50 +1,119 @@
 ---
 networks:
-  metal1:
-    wg:
-      ip: 10.0.10.0
-      cdir: 10.0.10.0/24
-    host:
-      ip: 10.0.10.1
-      cidr: 10.0.10.1/24
-    vm1:
-      ip: 10.0.10.2
-      cidr: 10.0.10.2/24
-    vm2:
-      ip: 10.0.10.3
-      cidr: 10.0.10.3/24
-    vm3:
-      ip: 10.0.10.4
-      cidr: 10.0.10.4/24
-  metal2:
-    wg:
-      ip: 10.0.11.0
-      cdir: 10.0.11.0/24
-    host:
-      ip: 10.0.11.1
-      cidr: 10.0.11.1/24
-    vm1:
-      ip: 10.0.11.2
-      cidr: 10.0.11.2/24
-    vm2:
-      ip: 10.0.11.3
-      cidr: 10.0.11.3/24
-    vm3:
-      ip: 10.0.11.4
-      cidr: 10.0.11.4/24
-  metal3:
-    wg:
-      ip: 10.0.12.0
-      cdir: 10.0.12.0/24
-    metal:
-      ip: 10.0.12.1
-      cidr: 10.0.12.1/24
-    vm1:
-      ip: 10.0.12.2
-      cidr: 10.0.12.2/24
-    vm2:
-      ip: 10.0.12.3
-      cidr: 10.0.12.3/24
-    vm3:
-      ip: 10.0.12.4
-      cidr: 10.0.12.4/24
+  # we use the hosts to iterate through the networks dynamically, so update
+  # this list if you had a new host or remove a host
+  devices: ["darkmini", "slave1", "slave2", "darkcoder"]
+  # These are the different physical hosts in our network
+  configuration:
+    darkmini:
+      host:
+        ip: "192.168.128.50"
+        # this can be your public ip from your ISP (you can use value from machine_remote_ip)
+        gateway: "192.168.128.50"
+        public_gateway: machine.ewe-studios.com
+        cidr: "192.168.128.0/24"
+        wg:
+          ip: 10.0.10.10
+          cdir: 10.0.10.0/24
+      vm1:
+        ip: 10.0.10.2
+        cidr: "192.168.128.0/32"
+        wg:
+          ip: 10.0.10.20
+          cdir: 10.0.10.0/24
+      vm2:
+        ip: 10.0.10.3
+        cidr: 10.0.10.3/24
+        wg:
+          ip: 10.0.10.30
+          cdir: 10.0.10.0/24
+      vm3:
+        ip: 10.0.10.4
+        cidr: 10.0.10.4/24
+        wg:
+          ip: 10.0.10.40
+          cdir: 10.0.10.0/24
+    slave1:
+      host:
+        ip: "192.168.128.10"
+        # this can be your public ip from your ISP (you can use value from machine_remote_ip)
+        gateway: "192.168.128.10"
+        public_gateway: machine.ewe-studios.com
+        cidr: "192.168.128.0/24"
+        wg:
+          ip: 10.0.11.10
+          cdir: 10.0.11.0/24
+      vm1:
+        ip: 10.0.11.2
+        cidr: 10.0.11.2/24
+        wg:
+          ip: 10.0.11.20
+          cdir: 10.0.11.0/24
+      vm2:
+        ip: 10.0.11.3
+        cidr: 10.0.11.3/24
+        wg:
+          ip: 10.0.11.30
+          cdir: 10.0.11.0/24
+      vm3:
+        ip: 10.0.11.4
+        cidr: 10.0.11.4/24
+        wg:
+          ip: 10.0.11.40
+          cdir: 10.0.11.0/24
+    slave2:
+      host:
+        ip: 192.168.128.20
+        # this can be your public ip from your ISP (you can use value from machine_remote_ip)
+        public_gateway: machine.ewe-studios.com
+        gateway: 192.168.128.20
+        cidr: "192.168.128.0/24"
+        wg:
+          ip: 10.0.12.10
+          cdir: 10.0.12.0/24
+      vm1:
+        ip: 10.0.12.2
+        cidr: 10.0.12.2/24
+        wg:
+          ip: 10.0.12.20
+          cdir: 10.0.12.0/24
+      vm2:
+        ip: 10.0.12.3
+        cidr: 10.0.12.3/24
+        wg:
+          ip: 10.0.12.30
+          cdir: 10.0.12.0/24
+      vm3:
+        ip: 10.0.12.4
+        cidr: 10.0.12.4/24
+        wg:
+          ip: 10.0.12.40
+          cdir: 10.0.12.0/24
+    darkcoder:
+      host:
+        ip: 192.168.138.159
+        # this can be your public ip from your ISP (you can use value from machine_remote_ip)
+        gateway: 192.168.138.159
+        public_gateway: machine.ewe-studios.com
+        cidr: "192.168.138.0/24"
+        wg:
+          ip: 10.0.13.10
+          cdir: 10.0.13.0/24
+      vm1:
+        ip: 10.0.13.2
+        cidr: 10.0.13.2/24
+        wg:
+          ip: 10.0.13.20
+          cdir: 10.0.13.0/24
+      vm2:
+        ip: 10.0.13.3
+        cidr: 10.0.13.3/24
+        wg:
+          ip: 10.0.13.30
+          cdir: 10.0.13.0/24
+      vm3:
+        ip: 10.0.13.4
+        cidr: 10.0.13.4/24
+        wg:
+          ip: 10.0.13.40
+          cdir: 10.0.13.0/24

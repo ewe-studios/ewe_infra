@@ -11,3 +11,25 @@
     state: present
     pkg:
       - iptables
+      - iptables-persistent
+- name: Set up default iptables rules
+  ansible.builtin.command: "{{item}}"
+  loop:
+    - "iptables -A INPUT -i lo -j ACCEPT"
+    - "iptables -A OUTPUT -o lo -j ACCEPT"
+    - "iptables -A INPUT -s 127.0.0.1/32 -j ACCEPT"
+    - "iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT"
+    - "iptables -A INPUT -i eth0 -j ACCEPT"
+    - "iptables -A INPUT -i {{ device.iface }} -j ACCEPT"
+    - "iptables -A INPUT -m iprange --src-range 192.168.128.1-192.168.128.254 -p udp -j ACCEPT"
+    - "iptables -A INPUT -m iprange --src-range 192.168.128.1-192.168.128.254 -p tcp -j ACCEPT"
+    - "iptables -A INPUT -m iprange --src-range 192.168.128.1-192.168.128.254 -p tcp --dport 5606 -j ACCEPT"
+    - "iptables -A INPUT -p udp --dport 5443 -j ACCEPT"
+    - "iptables -A INPUT -p tcp --dport 5443 -j ACCEPT"
+    - "iptables -A INPUT -p tcp --dport 5606 -j ACCEPT"
+    - "iptables -A INPUT -p udp --dport 5606 -j ACCEPT"
+    - "iptables -A INPUT -p tcp --dport 80 -j ACCEPT"
+    - "iptables -A INPUT -p tcp --dport 8080 -j ACCEPT"
+    - "iptables -A INPUT -p tcp --dport 443 -j ACCEPT"
+    - "iptables -A INPUT -j REJECT"
+    - "iptables -A OUTPUT -j ACCEPT"

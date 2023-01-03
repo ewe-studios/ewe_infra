@@ -1,32 +1,32 @@
 ---
 vps_image_version: 0.0.2
 
-master1:
-  allowed_ips: 10.0.10.0/32
-  ip: 10.0.10.2
-  cidr: 10.0.10.2/24
+device:
+  iface: "enp3s0f0"
 
 caddy2:
-  serverIP: 192.168.128.10
+  serverIP: "{{ networks[network].host.ip }}"
+
 wg:
-  name: "darkmini0"
+  name: "metal1"
   interface: "enp3s0f0"
-  cidr: "{{ networks.metal1.wg.cidr }}"
+  cidr: "{{ networks[network].wg.cidr }}"
 host:
-  cdir: "{{ networks.metal1.host.cidr }}"
-  serverIP: "{{ networks.metal1.host.ip }}"
-  private_key: "{{ secrets.metal1.host.private_key }}"
-  public_key: "{{ secrets.metal1.host.public_key }}"
+  cdir: "{{ networks[network].host.cidr }}"
+  serverIP: "{{ networks[network].host.ip }}"
+  private_key: "{{ secrets[network].host.private_key }}"
+  public_key: "{{ secrets[network].host.public_key }}"
+
 vms:
   - vm_name: "master1"
     vm_cpu: 2
     vm_memory: 2G
-    vm_disk: 2.50GB
+    vm_disk: 3GB
     vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
     owner_tag: "machine"
     owner_name: "{{ ansible_hostname }}"
     wg:
-      allowed_ips: "{{ master1.allowed_ips }}"
+      allowed_ips: "{{ networks.devices | map('extract',  | .networks[network].wg.cidr }}"
       ip: "{{ master1.ip }}"
       cidr: "{{ master1.cidr }}"
       private_key: "{{ secrets.master1.wg.private_key }}"

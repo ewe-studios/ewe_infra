@@ -10,9 +10,10 @@
     - "{{inventory_dir}}/vars/secrets.yml"
     - "{{inventory_dir}}/vars/networks.yml"
     - "{{inventory_dir}}/vars/{{host_secret_file}}"
-    - "{{inventory_dir}}/vars/{{host_var_file}}"
+    - "{{inventory_dir}}/vars/{{ host_var_file | default('default.yml') }}"
   roles:
     - role: ewe.infra.hello
+    - role: ewe.infra.git
     - role: ewe.infra.machine_ssh
     - role: ewe.infra.controller_ssh
     - role: ewe.infra.iptables
