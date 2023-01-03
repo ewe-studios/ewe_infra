@@ -4,6 +4,10 @@ vps_image_version: 0.0.2
 device:
   iface: "enp3s0f0"
 
+network: "darkmini"
+
+peers: ["slave1", "slave2"]
+
 caddy2:
   serverIP: "{{ networks[network].host.ip }}"
 
