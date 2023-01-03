@@ -614,5 +614,4 @@ sonarlint
 **/.DS_Store
 **/*/.DS_Store
 
-inventory.yml
 secrets.txt
