@@ -1,2 +1,4 @@
 ---
 - name: Create wire configuration for master
+  debug:
+    msg: "{{ vms }}"

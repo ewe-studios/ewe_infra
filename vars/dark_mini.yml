@@ -6,20 +6,26 @@ device:
 
 network: "darkmini"
 
-peers: ["slave1", "slave2"]
+peers: [ "darkmini","slave1", "slave2" ]
+
+peers_meta:
+  peers_vms: "{{ dict(peers | zip(peers | map('extract', networks) | map(attribute='vms'))) }}"
+  peers_wg: "{{ dict(peers | zip(peers | map('extract', networks) | map(attribute='host') | flatten | map(attribute='wg'))) }}"
+  peers_hosts: "{{ dict(peers | zip(peers | map('extract', networks) | map(attribute='host') | flatten )) }}"
 
 caddy2:
   serverIP: "{{ networks[network].host.ip }}"
 
 wg:
-  name: "metal1"
+  name: "metal0"
   interface: "enp3s0f0"
-  cidr: "{{ networks[network].wg.cidr }}"
-host:
-  cdir: "{{ networks[network].host.cidr }}"
-  serverIP: "{{ networks[network].host.ip }}"
+  cidr: "{{ networks[network].host.wg.cidr }}"
   private_key: "{{ secrets[network].host.private_key }}"
   public_key: "{{ secrets[network].host.public_key }}"
+
+host:
+  cidr: "{{ networks[network].host.cidr }}"
+  serverIP: "{{ networks[network].host.ip }}"
 
 vms:
   - vm_name: "master1"
@@ -29,12 +35,9 @@ vms:
     vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
     owner_tag: "machine"
     owner_name: "{{ ansible_hostname }}"
-    wg:
-      allowed_ips: "{{ networks.devices | map('extract',  | .networks[network].wg.cidr }}"
-      ip: "{{ master1.ip }}"
-      cidr: "{{ master1.cidr }}"
-      private_key: "{{ secrets.master1.wg.private_key }}"
-      public_key: "{{ secrets.master1.wg.public_key }}"
+    wg: "{{ wg }}"
+    peers: "{{ peers_meta }}"
+    network: "{{ host }}"
     labels:
       - name: "group"
         value: "controller"
