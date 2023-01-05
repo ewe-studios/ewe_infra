@@ -15,7 +15,15 @@ PostDown = iptables -D FORWARD -i {{ infra.wg.name }} -j ACCEPT; iptables -t nat
 PublicKey = {{ secrets[peer].host.public_key }}
 Endpoint = {{ infra.peers.peers_hosts[peer].gateway }}
 AllowedIPs  = {{  infra.peers.peers_hosts[peer].ldir }},{{ infra.peers.peers_hosts[peer].wg.cidr }}
+# PersistentKeepalive = 25 <- add this if you want stateful connections due to firewall rules allowing only established connections
 {% endfor %}
 
 # Peer configuration for vms servers
+{% for vm in infra.vms %}
+
+# Configuration for vm on target host: {{ vm.vm_name }}
 [Peer]
+PublicKey = {{ vm.secrets.public_key }}
+AllowedIPs  = {{ vm.network.wg.cidr }}
+# PersistentKeepalive = 25 <- add this if you want stateful connections due to firewall rules allowing only established connections
+{% endfor %}
