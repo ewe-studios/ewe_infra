@@ -3,117 +3,166 @@ networks:
   # These are the different physical hosts in our network
   darkmini:
     host:
-      ip: "192.168.128.50"
+      ip: 192.168.128.50
+      ldir: 192.168.128.50/32
       # this can be your public ip from your ISP (you can use value from machine_remote_ip)
-      gateway: "192.168.128.50"
+      gateway: 192.168.128.50
       public_gateway: machine.ewe-studios.com
-      cidr: "192.168.128.0/24"
+      cidr: 192.168.128.0/24
       wg:
+        port: 58190
         ip: 10.0.10.10
+        ldir: 10.0.10.10/32
         cidr: 10.0.10.0/24
     vms:
       - name: controller
         ip: 10.0.10.2
-        cidr: "10.0.10.0/24"
+        ldir: 10.0.10.2/32
+        cidr: 10.0.10.0/24
         wg:
+          port: 58190
           ip: 10.0.10.20
+          ldir: 10.0.10.20/32
           cidr: 10.0.10.0/24
       - name: worker1
         ip: 10.0.10.3
+        ldir: 10.0.10.3/32
         cidr: 10.0.10.3/24
         wg:
+          port: 58190
           ip: 10.0.10.30
+          ldir: 10.0.10.30/32
           cidr: 10.0.10.0/24
       - name: worker2
         ip: 10.0.10.4
+        ldir: 10.0.10.4/32
         cidr: 10.0.10.4/24
         wg:
+          port: 58190
           ip: 10.0.10.40
+          ldir: 10.0.10.40/32
           cidr: 10.0.10.0/24
   slave1:
     host:
-      ip: "192.168.128.10"
+      ip: 192.168.128.10
+      ldir: 192.168.128.10/32
       # this can be your public ip from your ISP (you can use value from machine_remote_ip)
-      gateway: "192.168.128.10"
+      gateway: 192.168.128.10
       public_gateway: machine.ewe-studios.com
-      cidr: "192.168.128.0/24"
+      lcidr: 192.168.128.10/32
+      cidr: 192.168.128.0/24
       wg:
+        port: 58190
         ip: 10.0.11.10
+        ldir: 10.0.11.10/32
         cidr: 10.0.11.0/24
     vms:
       - name: controller
         ip: 10.0.11.2
-        cidr: "10.0.11.0/24"
+        ldir: 10.0.11.2/32
+        cidr: 10.0.11.0/24
         wg:
+          port: 58190
           ip: 10.0.11.20
+          ldir: 10.0.11.20/32
           cidr: 10.0.11.0/24
       - name: worker1
         ip: 10.0.11.3
+        ldir: 10.0.11.3/32
         cidr: 10.0.11.3/24
         wg:
+          port: 58190
           ip: 10.0.11.30
+          ldir: 10.0.11.30/32
           cidr: 10.0.11.0/24
       - name: worker2
         ip: 10.0.11.4
+        ldir: 10.0.11.4/32
         cidr: 10.0.11.4/24
         wg:
+          port: 58190
           ip: 10.0.11.40
+          ldir: 10.0.11.40/32
           cidr: 10.0.11.0/24
   slave2:
     host:
       ip: 192.168.128.20
+      ldir: 192.168.128.20/32
       # this can be your public ip from your ISP (you can use value from machine_remote_ip)
       public_gateway: machine.ewe-studios.com
       gateway: 192.168.128.20
-      cidr: "192.168.128.0/24"
+      cidr: 192.168.128.0/24
       wg:
+        port: 58190
         ip: 10.0.12.10
+        ldir: 10.0.12.10/32
         cidr: 10.0.12.0/24
     vms:
       - name: controller
         ip: 10.0.12.2
-        cidr: "10.0.12.0/24"
+        ldir: 10.0.12.2/32
+        cidr: 10.0.12.0/24
         wg:
+          port: 58190
           ip: 10.0.12.20
+          ldir: 10.0.12.20/32
           cidr: 10.0.12.0/24
       - name: worker1
         ip: 10.0.12.3
+        ldir: 10.0.12.3/32
         cidr: 10.0.12.3/24
         wg:
+          port: 58190
           ip: 10.0.12.30
+          ldir: 10.0.12.30/32
           cidr: 10.0.12.0/24
       - name: worker2
         ip: 10.0.12.4
+        ldir: 10.0.12.4/32
         cidr: 10.0.12.4/24
         wg:
+          port: 58190
           ip: 10.0.12.40
+          ldir: 10.0.12.40/32
           cidr: 10.0.12.0/24
   darkcoder:
     host:
       ip: 192.168.138.159
+      ldir: 192.168.138.159/32
       # this can be your public ip from your ISP (you can use value from machine_remote_ip)
       gateway: 192.168.138.159
       public_gateway: 192.168.138.159
-      cidr: "192.168.138.0/24"
+      cidr: 192.168.138.0/24
       wg:
+        port: 58190
         ip: 10.0.13.10
+        ldir: 10.0.13.10/32
         cidr: 10.0.13.0/24
     vms:
       - name: controller
         ip: 10.0.13.2
-        cidr: "10.0.13.0/24"
+        ldir: 10.0.13.2/32
+        cidr: 10.0.13.0/24
         wg:
+          port: 58190
           ip: 10.0.13.20
+          ldir: 10.0.13.20/32
           cidr: 10.0.13.0/24
       - name: worker1
         ip: 10.0.13.3
+        ldir: 10.0.13.3/32
         cidr: 10.0.13.3/24
         wg:
+          port: 58190
           ip: 10.0.13.30
+          ldir: 10.0.13.30/32
           cidr: 10.0.13.0/24
       - name: worker2
         ip: 10.0.13.4
+        ldir: 10.0.13.4/32
         cidr: 10.0.13.4/24
         wg:
+          port: 58190
           ip: 10.0.13.40
+          ldir: 10.0.13.40/32
           cidr: 10.0.13.0/24

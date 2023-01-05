@@ -1,49 +1,95 @@
 ---
-vps_image_version: 0.0.2
-
-device:
-  iface: "enp3s0f0"
 
 network: "darkmini"
+network_name: "metal0"
+mesh: [ "darkmini" ]
+peers: [ "slave1", "slave2" ]
 
-peers: [ "darkmini","slave1", "slave2" ]
+network_mesh:
+  vms: "{{ dict(mesh | zip(mesh | map('extract', networks) | map(attribute='vms'))) }}"
+  host: "{{ dict(mesh | zip(mesh | map('extract', networks) | map(attribute='host') | flatten )) }}"
 
-peers_meta:
+peers_mesh:
   peers_vms: "{{ dict(peers | zip(peers | map('extract', networks) | map(attribute='vms'))) }}"
-  peers_wg: "{{ dict(peers | zip(peers | map('extract', networks) | map(attribute='host') | flatten | map(attribute='wg'))) }}"
   peers_hosts: "{{ dict(peers | zip(peers | map('extract', networks) | map(attribute='host') | flatten )) }}"
 
-caddy2:
-  serverIP: "{{ networks[network].host.ip }}"
+host: "{{ network_mesh.host[network] }}"
+controller_name: "{{ network_mesh.vms[network][0].name }}"
+slave1: "{{ network_mesh.vms[network][1].name }}"
+slave2: "{{ network_mesh.vms[network][2].name }}"
 
-wg:
-  name: "metal0"
-  interface: "enp3s0f0"
-  cidr: "{{ networks[network].host.wg.cidr }}"
-  private_key: "{{ secrets[network].host.private_key }}"
-  public_key: "{{ secrets[network].host.public_key }}"
-
-host:
-  cidr: "{{ networks[network].host.cidr }}"
-  serverIP: "{{ networks[network].host.ip }}"
-
-vms:
-  - vm_name: "master1"
-    vm_cpu: 2
-    vm_memory: 2G
-    vm_disk: 3GB
-    vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
-    owner_tag: "machine"
-    owner_name: "{{ ansible_hostname }}"
-    wg: "{{ wg }}"
-    peers: "{{ peers_meta }}"
-    network: "{{ host }}"
-    labels:
-      - name: "group"
-        value: "controller"
-      - name: "desc"
-        value: "controller vm for infrastructure in master1"
-    annotations:
-      - name: "group"
-        value: "controller"
+infra:
+  name: "{{ network_name }}"
+  mesh: "{{ network_mesh }}"
+  peers: "{{ peers_mesh }}"
+  host: "{{ host }}"
+  device:
+    iface: "enp3s0f0"
+  caddy2:
+    serverIP: "{{ networks[network].host.ip }}"
+  wg:
+    name: "{{ network_name }}"
+    interface: "enp3s0f0"
+    port: "{{ networks[network].host.wg.port }}"
+    cidr: "{{ networks[network].host.wg.cidr }}"
+    private_key: "{{ secrets[network].host.private_key }}"
+    public_key: "{{ secrets[network].host.public_key }}"
+  vms:
+    - vm_name: "{{ controller_name }}"
+      vm_cpu: 2
+      vm_memory: 2G
+      vm_disk: 3GB
+      vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
+      owner_tag: "machine"
+      owner_name: "{{ ansible_hostname }}"
+      network: "{{ network_mesh.vms[network][0] }}"
+      secrets:
+        private_key: "{{ secrets[network][controller_name].private_key }}"
+        public_key: "{{ secrets[network][controller_name].public_key }}"
+      labels:
+        - name: "group"
+          value: "controller"
+        - name: "desc"
+          value: "controller vm for infrastructure in {{ network_name }}"
+      annotations:
+        - name: "group"
+          value: "controller"
+    - vm_name: "{{ slave1 }}"
+      vm_cpu: 2
+      vm_memory: 2G
+      vm_disk: 3GB
+      vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
+      owner_tag: "machine"
+      owner_name: "{{ ansible_hostname }}"
+      network: "{{ network_mesh.vms[network][1] }}"
+      secrets:
+        private_key: "{{ secrets[network][slave1].private_key }}"
+        public_key: "{{ secrets[network][slave1].public_key }}"
+      labels:
+        - name: "group"
+          value: "workers"
+        - name: "desc"
+          value: "worker vm for infrastructure in {{ network_name }}"
+      annotations:
+        - name: "group"
+          value: "workers"
+    - vm_name: "{{ slave2 }}"
+      vm_cpu: 2
+      vm_memory: 2G
+      vm_disk: 3GB
+      vm_image: "localhost:5443/machine_image:{{ vps_image_version }}"
+      owner_tag: "machine"
+      owner_name: "{{ ansible_hostname }}"
+      network: "{{ network_mesh.vms[network][2] }}"
+      secrets:
+        private_key: "{{ secrets[network][slave2].private_key }}"
+        public_key: "{{ secrets[network][slave2].public_key }}"
+      labels:
+        - name: "group"
+          value: "workers"
+        - name: "desc"
+          value: "worker vm for infrastructure in {{ network_name }}"
+      annotations:
+        - name: "group"
+          value: "workers"
 

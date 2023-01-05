@@ -6,4 +6,4 @@
     mode: "0755"
     state: directory
   loop:
-    - "wireguard/{{wg.name}}"
+    - "wireguard/{{infra.wg.name}}"
