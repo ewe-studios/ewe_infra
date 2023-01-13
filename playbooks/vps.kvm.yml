@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ metal_master | default('metal_master') }}"
+- hosts: "{{ vps_host | default('metal_servers') }}"
   gather_facts: true
   become: yes
   vars:
@@ -14,10 +14,12 @@
     - "{{inventory_dir}}/vars/{{ host_var_file | default('default.yml') }}"
   roles:
     - role: ewe.infra.hello
+    - role: ewe.infra.wireguard_hello
 #    - role: ewe.infra.git
+#    - role: ewe.infra.net
 #    - role: ewe.infra.machine_ssh
 #    - role: ewe.infra.controller_ssh
-#    - role: ewe.infra.iptables
+    - role: ewe.infra.iptables
 #    - role: ewe.infra.kvm
 #    - role: ewe.infra.yq
 #    - role: ewe.infra.docker

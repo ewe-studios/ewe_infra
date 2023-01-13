@@ -350,6 +350,9 @@
     insertafter: EOF
 
 
+### capture packages on interface
+sudo tcpdump -envi wg0 host 8.8.8.8
+
 ## Conditionals with host groups
 
 - name: "Write kubeconfig for user"

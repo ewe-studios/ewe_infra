@@ -91,6 +91,10 @@ metal_slaves:
       host_var_file: slave2.yml
       host_secret_file: slave2.secrets.yml
 
+metal_servers:
+  children:
+    metal_master:
+    metal_slaves:
 
 # update these to reflect all your servers
 all_hosts:

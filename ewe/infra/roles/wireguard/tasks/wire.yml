@@ -2,10 +2,18 @@
 - name: Show me config
   debug:
     msg: "{{ infra }}"
-- name: Create wire configuration for server
+- name: Create wire configuration for metal server
   become_user: "{{ user_account }}"
   template:
     src: "{{role_path}}/files/wireguard.j2"
     dest: "{{wireguard_conf_dir}}/{{infra.wg.name}}.conf"
     mode: '0600'
     force: yes
+- name: Create wire configuration for vm servers
+  become_user: "{{ user_account }}"
+  template:
+    src: "{{role_path}}/files/wireguard.vm.j2"
+    dest: "{{wireguard_conf_dir}}/{{item.vm_name}}.conf"
+    mode: '0600'
+    force: yes
+  with_items: "{{ infra.vms }}"

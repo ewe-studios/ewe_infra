@@ -49,4 +49,3 @@ galaxy_info:
 
 dependencies:
   - ewe.infra.hello
-  - ewe.infra.wireguard_hello

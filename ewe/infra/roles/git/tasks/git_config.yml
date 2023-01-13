@@ -1,5 +1,6 @@
 ---
 - name: Disable/Mask the following systemd services
+  ignore_errors: yes
   systemd:
     name: "{{item}}"
     enabled: no
