@@ -1,12 +1,4 @@
 ---
-# tasks file for ignite_mkvm
-- name: set vms directory path
-  set_fact:
-    vm_dir: "{{ewe_dir}}/vms"
-- name: Create template for generating vms
-  become_user: "{{ user_account }}"
-  template:
-    src: "{{role_path}}/files/ignite_vm.j2"
-    dest: "{{vm_dir}}/{{infra.name}}.yaml"
-    mode: '0600'
-    force: yes
+- include_tasks: init.yml
+- include_tasks: dirs.yml
+- include_tasks: config.yml

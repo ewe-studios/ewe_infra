@@ -19,6 +19,7 @@ networks:
         ip: 10.0.50.2
         lidr: 10.0.50.2/32
         cidr: 10.0.50.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.10.20
@@ -28,6 +29,7 @@ networks:
         ip: 10.0.50.3
         lidr: 10.0.50.3/32
         cidr: 10.0.50.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.10.30
@@ -37,6 +39,7 @@ networks:
         ip: 10.0.50.4
         lidr: 10.0.50.4/32
         cidr: 10.0.50.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.10.40
@@ -60,6 +63,7 @@ networks:
         ip: 10.0.51.2
         lidr: 10.0.51.2/32
         cidr: 10.0.51.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.11.20
@@ -69,6 +73,7 @@ networks:
         ip: 10.0.51.3
         lidr: 10.0.51.3/32
         cidr: 10.0.51.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.11.30
@@ -78,6 +83,7 @@ networks:
         ip: 10.0.51.4
         lidr: 10.0.51.4/32
         cidr: 10.0.51.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.11.40
@@ -101,6 +107,7 @@ networks:
         ip: 10.0.52.2
         lidr: 10.0.52.2/32
         cidr: 10.0.52.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.12.20
@@ -110,6 +117,7 @@ networks:
         ip: 10.0.52.3
         lidr: 10.0.52.3/32
         cidr: 10.0.52.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.12.30
@@ -119,6 +127,7 @@ networks:
         ip: 10.0.52.4
         lidr: 10.0.52.4/32
         cidr: 10.0.52.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.12.40
@@ -142,6 +151,7 @@ networks:
         ip: 10.0.53.2
         lidr: 10.0.53.2/32
         cidr: 10.0.53.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.13.20
@@ -151,6 +161,7 @@ networks:
         ip: 10.0.53.3
         lidr: 10.0.53.3/32
         cidr: 10.0.53.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.13.30
@@ -160,6 +171,7 @@ networks:
         ip: 10.0.53.4
         lidr: 10.0.53.4/32
         cidr: 10.0.53.0/24
+        port_mappings:
         wg:
           port: 58190
           ip: 10.0.13.40

@@ -4,10 +4,15 @@
   ignore_errors: yes
   register: registry_exists
 - name: Check if giving docker registry is running
-  ansible.builtin.shell: "docker inspect registry_registry_1 -f \"{{ '{{' }}.State.Running {{ '}}' }}\""
   ignore_errors: yes
+  ansible.builtin.shell: "docker inspect registry_registry_1 -f \"{{ '{{' }}.Id {{ '}}' }}\""
   when: registry_exists.rc == 0
-  register: registry_status
-- name: Install registry if not available or running
+  register: registry_id
+- name: Kill existing container
+  when: registry_exists.rc == 0
+  ansible.builtin.shell: "docker kill {{ registry_id.stdout }}"
+- name: Remove existing container
+  when: registry_exists.rc == 0
+  ansible.builtin.shell: "docker rm {{ registry_id.stdout }}"
+- name: Install registry again
   include_tasks: docker_registry.yml
-  when: registry_exists.rc == 1 or registry_status.stdout == "false"

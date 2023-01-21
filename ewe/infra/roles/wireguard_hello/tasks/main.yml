@@ -1,4 +1,4 @@
 ---
 - name: set wireguard directory path
   set_fact:
-    wireguard_conf_dir: "{{ewe_dir}}/wireguard/{{infra.wg.name}}"
+    wireguard_conf_dir: "{{ewe_dir}}/{{infra.name}}"
