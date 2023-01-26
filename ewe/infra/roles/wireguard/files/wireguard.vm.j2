@@ -7,6 +7,3 @@ PrivateKey={{ item.secrets.private_key }}
 [Peer]
 PublicKey = {{ infra.wg.public_key }}
 AllowedIPs = {{ infra.wg.cidr }}
-{% for peer in infra.peers.peers_hosts %}
-AllowedIPs = {{ infra.peers.peers_hosts[peer].cidr }}
-{% endfor %}

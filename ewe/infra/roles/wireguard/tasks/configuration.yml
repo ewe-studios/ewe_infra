@@ -1,15 +1,17 @@
 ---
-- name: Create wire configuration for metal server
-  no_log: yes
+#- debug:
+#    msg: "{{ infra }}"
+- name: Create wire configuration for metal server (hub)
+  no_log: no
   become_user: "{{ user_account }}"
   template:
     owner: "{{ user_account }}"
-    src: "{{role_path}}/files/wireguard.j2"
+    src: "{{role_path}}/files/wireguard.metal.j2"
     dest: "{{infra.directory}}/{{infra.name}}/{{infra.wg.name}}.conf"
     mode: '0600'
     force: yes
 - name: Create wire configuration for vm servers
-  no_log: yes
+  no_log: no
   become_user: "{{ user_account }}"
   template:
     owner: "{{ user_account }}"

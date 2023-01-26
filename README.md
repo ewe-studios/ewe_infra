@@ -38,3 +38,19 @@ Goal:
 4. Use WeaveIgnite to set up 3 microvm as controller nodes (goal for setup k0s via the vps_k0s and generated custom host files).
 5. Use WeaveIgnite to set up 3 microvm as worker nodes (goal for setup k0s via the vps_k0s and generated custom host files).
 6. Generate a new custom inventory file containing host IPs and details for controllers and worker nodes.
+
+
+### Extra Information
+
+Ansible has varying plugins for dynamic inventories:
+
+```bash
+ansible.builtin.auto                                    Loads and executes an inventory plugin specified in a YAML config                                                                                                                                                                                                                                                                                                        
+ansible.builtin.constructed                             Uses Jinja2 to construct vars and groups based on existing inventory                                                                                                                                                                                                                                                                                                     
+ansible.builtin.generator                               Uses Jinja2 to construct hosts and groups from patterns                                                                                                                                                                                                                                                                                                                  
+ansible.builtin.host_list                               Parses a 'host list' string                                                                                                                                                                                                                                                                                                                                              
+ansible.builtin.ini                                     Uses an Ansible INI file as inventory source                                                                                                                                                                                                                                                                                                                             
+ansible.builtin.script                                  Executes an inventory script that returns JSON                                                                                                                                                                                                                                                                                                                           
+ansible.builtin.toml                                    Uses a specific TOML file as an inventory source                                                                                                                                                                                                                                                                                          
+ansible.builtin.yaml                                    Uses a specific YAML file as an inventory source                
+```

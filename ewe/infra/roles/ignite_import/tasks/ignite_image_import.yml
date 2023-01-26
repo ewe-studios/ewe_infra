@@ -17,3 +17,6 @@
   shell: "ignite image import --ignite-config={{ewe_dir}}/ignite-vps/registry.yaml localhost:5443/machine_image:{{ vps_image_version }}"
   environment:
     IGNITE_CONTAINERD_INSECURE_REGISTRIES: "localhost:5000,localhost:5443"
+- name: Register fact about ignite registry
+  set_fact:
+    ignite_registry: "{{ewe_dir}}/ignite-vps/registry.yaml"

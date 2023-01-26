@@ -1,8 +1,8 @@
-#jinja2:lstrip_blocks: True
-#jinja2:trim_blocks: True
-
+#jinja2: lstrip_blocks: True
+#jinja2: trim_blocks: True
 # See documentation: https://ignite.readthedocs.io/en/stable/declarative-config/
-{% for vm in infra.vms %}
+# See Ignite VM Spec: https://github.com/weaveworks/ignite/blob/cc6fa4c9aba514e6d6e1030e3c35344f90061715/pkg/apis/ignite/v1alpha4/types.go
+{% set vm=item %}
 ---
 apiVersion: ignite.weave.works/v1alpha4
 kind: VM
@@ -114,7 +114,7 @@ spec:
     # public key into the VM. This allows for automatic "ignite ssh" logins.
     # Alternatively: specify a path to a public key to put in /root/.ssh/authorized_keys in the VM.
     # Default: unset, no actions regarding SSH automation
-  ssh: {{ vm.vm_pub_ssh_key or "true" }}
+  # ssh: {{ vm.vm_pub_ssh_key or "true" }}
 
   copyFiles:
   # Optional, an array of files/directories to copy into the VM on creation
@@ -129,4 +129,3 @@ spec:
     vmPath: {{ copy.vm_path }}
     {% endfor %}
     {% endif %}
-{% endfor %}

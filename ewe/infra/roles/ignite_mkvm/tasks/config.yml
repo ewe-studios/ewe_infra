@@ -4,7 +4,8 @@
   become_user: "{{ user_account }}"
   template:
     src: "{{role_path}}/files/ignite_vm.j2"
-    dest: "{{infra.directory}}/{{infra.name}}/{{infra.name}}_vms.yaml"
+    dest: "{{infra.directory}}/{{infra.name}}/vm_{{item.vm_name}}.yaml"
     owner: "{{ user_account }}"
     mode: "0600"
     force: yes
+  with_items: "{{ infra.vms }}"

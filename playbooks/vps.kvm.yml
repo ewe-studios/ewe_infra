@@ -14,27 +14,27 @@
     - "{{inventory_dir}}/vars/{{ host_var_file | default('default.yml') }}"
   roles:
     - role: ewe.infra.hello
-    - role: ewe.infra.wireguard_hello
-    - role: ewe.infra.git
-    - role: ewe.infra.net
+#    - role: ewe.infra.wireguard_hello
+#    - role: ewe.infra.git
+#    - role: ewe.infra.net
     - role: ewe.infra.machine_ssh
     - role: ewe.infra.controller_ssh
-    - role: ewe.infra.kvm
-    - role: ewe.infra.yq
-    - role: ewe.infra.docker
-    - role: ewe.infra.docker_compose
-    - role: ewe.infra.cni
-    - role: ewe.infra.calico
-    - role: ewe.infra.containerd
-    - role: ewe.infra.firecracker
-    - role: ewe.infra.iptables
-    - role: ewe.infra.docker_restart
-    - role: ewe.infra.docker_registry
-    - role: ewe.infra.caddy2
+#    - role: ewe.infra.kvm
+#    - role: ewe.infra.yq
+#    - role: ewe.infra.docker
+#    - role: ewe.infra.docker_compose
+#    - role: ewe.infra.cni
+#    - role: ewe.infra.calico
+#    - role: ewe.infra.containerd
+#    - role: ewe.infra.firecracker
+#    - role: ewe.infra.iptables
+#    - role: ewe.infra.docker_restart
+#    - role: ewe.infra.docker_registry
     - role: ewe.infra.ignite
     - role: ewe.infra.ignite_image
     - role: ewe.infra.ignite_import
     - role: ewe.infra.ignite_mkvm
     - role: ewe.infra.wireguard
+#    - role: ewe.infra.caddy2
   tasks:
 #    - import_tasks: ../tasks/general_tasks_here.yml
