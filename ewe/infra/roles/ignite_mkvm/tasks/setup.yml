@@ -26,7 +26,7 @@
 - name: Create VMS from declarative file
   no_log: no
   ansible.builtin.shell: "ignite --ignite-config {{ewe_dir}}/ignite-vps/registry.yaml run --config {{infra.directory}}/{{infra.name}}/vm_{{item.vm_name}}.yaml"
-  when: live_vms[item.vm_name].exist|bool == False and  live_vms[item.vm_name].running|bool == False
+  when: live_vms[item.vm_name].exist|bool == False or live_vms[item.vm_name].running|bool == False
   loop: "{{ infra.vms }}"
   loop_control:
     index_var: index

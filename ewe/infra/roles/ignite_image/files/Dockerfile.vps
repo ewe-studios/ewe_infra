@@ -16,7 +16,7 @@ RUN apt-get update \
     apt-transport-https containerd gnupg2 build-essential bc curl dkms git gnupg \
     ifupdown iproute2 iptables iputils-ping libc6 libelf-dev net-tools netcat openresolv perl pkg-config qrencode  \
     && update-alternatives --set iptables /usr/sbin/iptables-legacy \
-    && apt-get install wireguard wireguard-tools \
+    && apt-get install -y wireguard wireguard-tools \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && echo "" > /etc/machine-id \
@@ -62,7 +62,7 @@ RUN wget -O /usr/bin/k0s https://github.com/k0sproject/k0s/releases/download/${K
     && wget -O /usr/bin/coredns.tar.gz https://github.com/coredns/coredns/releases/download/v1.10.0/coredns_1.10.0_linux_amd64.tgz \
     && wget -O /usr/bin/etcd.tar.gz https://github.com/etcd-io/etcd/releases/download/v3.4.23/etcd-v3.4.23-linux-amd64.tar.gz \
     && tar -xvf /usr/bin/etcd.tar.gz --strip-components=1 -C /usr/bin/  \
-    && tar -xvf /usr/bin/coredns.tar.gz --strip-components=1 -C /usr/bin/  \
+    && tar -xvf /usr/bin/coredns.tar.gz -C /usr/bin/  \
     && rm -rf /usr/bin/etcd.tar.gz /usr/bin/coredns.tar.gz /usr/bin/Documentation *.md \
     && chown -R ubuntu:root /home/ubuntu/.ssh \
     && chmod -R 700 /home/ubuntu/.ssh \
