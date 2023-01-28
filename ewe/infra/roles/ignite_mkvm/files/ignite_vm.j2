@@ -47,7 +47,7 @@ spec:
     cmdLine: {{ vm.kernel_boot or "console=ttyS0 reboot=k panic=1 pci=off ip=dhcp" }}
     # Required, what OCI image to get the kernel binary (and optionally modules) from
     # Default: weaveworks/ignite-kernel:5.10.51
-    oci: {{ vm.kernel or "weaveworks/ignite-kernel:5.14.16" }}
+    oci: {{ vm.kernel or "influx6/ignite-kernel:5.14.16" }}
   sandbox:
       # Optional, what OCI image to use as the ignite sandbox.
       # Default: weaveworks/ignite
