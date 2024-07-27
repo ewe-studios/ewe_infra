@@ -1,12 +1,18 @@
 ---
-- name: check if we have docker installed
-  register: docker_check
-  ignore_errors: yes
+- name: Check if docker.service is running
+  ignore_errors: true
   service:
     name: docker
     state: started
+  register: docker_service
+- debug:
+    msg: "whats: {{docker_service}}"
+- name: Handle failed state check
+  when: docker_service.failed == true
+  set_fact:
+    docker_service: { "state": "failed" }
 - name: restart docker if installed
-  when: docker_check.state == "started"
+  when: docker_service.state == "started"
   service:
     name: docker
     state: restarted

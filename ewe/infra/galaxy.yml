@@ -25,7 +25,7 @@ description: Infrastructure collection that powers the ewe-studios consultancy
 
 # Either a single license or a list of licenses for content inside a collection. Ansible Galaxy currently only
 # accepts L(SPDX,https://spdx.org/licenses/) licenses. This key is mutually exclusive with 'license_file'
-license: MIT
+license: [MIT]
 
 # The path to the license file for the collection. This path is relative to the root of the collection. This key is
 # mutually exclusive with 'license'
@@ -58,4 +58,3 @@ issues: https://github.com/ewe-studios/ewe_infra/issues
 # uses 'fnmatch' to match the files or directories. Some directories and files like 'galaxy.yml', '*.pyc', '*.retry',
 # and '.git' are always filtered
 build_ignore: []
-

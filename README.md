@@ -30,6 +30,12 @@ k0s
 make deploy_play FILE=vps_kvm EXTRA_VARS=""
 ```
 
+e.g 
+
+```bash
+make deploy_play FILE=local_llm EXTRA_VARS="vps_host='metal_slaves'"
+```
+
 Goal:
 
 1. Install containerd binary from its GitHub release.

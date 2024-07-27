@@ -13,7 +13,7 @@ ANSIBLE_PLAYS?="${ANSIBLE_ROOT_DIR}/playbooks"
 ANSIBLE_HOSTS?="${ANSIBLE_ROOT_DIR}/inventory.yml"
 
 define run_ansible
-    ansible-galaxy collection install -f ewe
+    ansible-galaxy collection install -f --force-with-deps ewe
 	$(if $(($(LOG),true)),(ansible-playbook ${VERBOSITY} -i ${ANSIBLE_HOSTS} --extra-vars "${EXTRA_VARS}" ${EXTRA_ARGS} "${ANSIBLE_ROOT_DIR}/$1.yml" | tee ${LOG_FILE}),(ansible-playbook ${VERBOSITY} -i ${ANSIBLE_HOSTS} --extra-vars "${EXTRA_VARS}" ${EXTRA_ARGS} ${ANSIBLE_ROOT_DIR}/$1.yml))
 endef
 

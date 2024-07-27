@@ -1,9 +1,26 @@
 ---
+- name: create docker group if not exists
+  ignore_errors: true
+  become_user: "{{user_account}}"
+  shell: "{{item}}"
+  loop:
+    - "sudo addgroup --system docker"
+    - "sudo usermod -a -G docker $USER"
+    - "sudo snap connect docker:home"
+    - "sudo usermod -aG kvm $USER"
+    - "newgrp docker"
 - name: Check if docker.service is running
+  ignore_errors: true
   service:
     name: docker
     state: started
   register: docker_service
+- debug:
+    msg: "whats: {{docker_service}}"
+- name: Handle failed state check
+  when: docker_service.failed == true
+  set_fact:
+    docker_service: { "state": "failed" }
 - name: Remove default docker install from ubuntu repo
   when: docker_service.state != "started"
   package:
@@ -60,6 +77,7 @@
       - docker-ce-cli
       - containerd.io
       - aufs-tools
+      - docker-compose-plugin
       - cgroupfs-mount
 - name: Ensure group docker exists
   when: docker_service.state != "started"
@@ -69,8 +87,7 @@
 - name: Add user "{{ user_account }}" to group docker
   when: docker_service.state != "started"
   user:
-    name: '{{ user_account }}'
+    name: "{{ user_account }}"
     groups:
       - docker
     append: yes
-

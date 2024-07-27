@@ -1,10 +1,22 @@
 ---
 # tasks file for docker_service_check
 - name: Check if docker.service is running
+  ignore_errors: true
   service:
     name: docker
     state: started
   register: docker_service
-- name: Set facts in docker is started
+- debug:
+    msg: "whats: {{docker_service}}"
+- name: Handle failed state check
+  when: docker_service.failed == true
   set_fact:
-    is_docker_running: docker_service.state == "started"
+    docker_service: { "state": "failed" }
+- name: Set facts in docker is started
+  when: docker_service.state == "started"
+  set_fact:
+    is_docker_running: true
+- name: Set facts in docker is not started
+  when: docker_service.state != "started"
+  set_fact:
+    is_docker_running: false

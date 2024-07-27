@@ -1,8 +1,10 @@
 ---
-- name: install docker-compose via pip
-  become_user: "{{user_account}}"
-  command: "pip install docker-compose"
-- name: Install needed packages
+- name: install python-pip packages
+  package:
+    state: present
+    pkg:
+      - python3-pip
+- name: install needed packages
   package:
     state: present
     pkg:
@@ -40,7 +42,7 @@
   shell: "htpasswd -Bbn docker docker > {{ewe_dir}}/registry/auth/htpasswd"
 - name: "Start docker registry for service"
   become_user: "{{user_account}}"
-  command: "docker-compose --project-directory={{ewe_dir}}/registry --project-name=registry -f {{ewe_dir}}/registry/docker_registry.compose.yml up -d --remove-orphans"
+  command: "docker compose --project-directory={{ewe_dir}}/registry --project-name=registry -f {{ewe_dir}}/registry/docker_registry.compose.yml up -d --remove-orphans"
 - name: "Add docker registry to docker in host"
   become_user: "{{user_account}}"
   command: "docker login -u docker -p docker https://localhost:5443"

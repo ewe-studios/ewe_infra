@@ -1,5 +1,4 @@
 ---
-
 localhost:
   vars:
     group: "local"
@@ -68,6 +67,23 @@ metal_master:
 
 # These are slaves metal machines which
 # delete this if not part of your infra
+llm_server:
+  vars:
+    group: "infra-servers"
+    user_account: "darkvoid"
+    machine_ssh_file: "/home/darkvoid/.ssh/id_rsa.pub"
+  hosts:
+    slave_1:
+      network: slave1
+      ansible_host: 192.168.128.10
+      ansible_port: 5606
+      ansible_user: darkvoid
+      user_account: "darkvoid"
+      host_var_file: slave1.yml
+      host_secret_file: slave1.secrets.yml
+
+# These are slaves metal machines which
+# delete this if not part of your infra
 metal_slaves:
   vars:
     group: "infra-servers"
@@ -102,7 +118,6 @@ all_hosts:
     metal_master:
     metal_slaves:
     metal_dns:
-
 #ewe_cluster_local:
 #  vars:
 #    domain: local.ewe-studio.com
