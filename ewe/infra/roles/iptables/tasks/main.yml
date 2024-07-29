@@ -17,13 +17,13 @@
     table: "nat"
     chain: "{{ item }}"
     flush: true
-  with_items: ['INPUT', 'OUTPUT', 'PREROUTING', 'POSTROUTING']
+  with_items: ["INPUT", "OUTPUT", "PREROUTING", "POSTROUTING"]
 - name: Flush filter INPUT table rules
   ansible.builtin.iptables:
     table: "filter"
     chain: "{{ item }}"
     flush: true
-  with_items: ['INPUT', 'OUTPUT']
+  with_items: ["INPUT", "OUTPUT"]
 - name: Accept connection from LIBVIRT_INP
   ansible.builtin.iptables:
     chain: INPUT
@@ -93,6 +93,20 @@
     destination_port: 443
     jump: ACCEPT
     state: present
+- name: Accept connections for port udp/8080
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: udp
+    destination_port: 8080
+    jump: ACCEPT
+    state: present
+- name: Accept connections for port tcp/8080
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 8080
+    jump: ACCEPT
+    state: present
 - name: Accept connections for port tcp/80
   ansible.builtin.iptables:
     chain: INPUT
@@ -111,6 +125,20 @@
     chain: INPUT
     protocol: udp
     destination_port: 5606
+    jump: ACCEPT
+    state: present
+- name: Accept connections for port udp/11434
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: udp
+    destination_port: 11434
+    jump: ACCEPT
+    state: present
+- name: Accept connections for port tcp/11434
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 11434
     jump: ACCEPT
     state: present
 - name: Accept connections for port tcp/5606

@@ -24,6 +24,9 @@ infra:
   peers: "{{ peers_mesh }}"
   host: "{{ host }}"
   directory: "{{ infra_dir }}"
+  docker:
+    networks:
+      apps: app_network
   device:
     iface: "eno1"
     router:

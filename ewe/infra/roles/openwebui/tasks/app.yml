@@ -1,0 +1,27 @@
+---
+- name: create directories
+  become_user: "{{user_account}}"
+  file:
+    path: "{{ewe_dir}}/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - "openwebui"
+    - "openwebui/data"
+- name: Create a openwebui docker container
+  docker_container:
+    name: "openwebui_app"
+    image: "ghcr.io/open-webui/open-webui:main"
+    state: started
+    network_mode: bridge
+    recreate: no
+    restart: yes
+    env:
+      OLLAMA_BASE_URL: "http://ollama:11434"
+    restart_policy: unless-stopped
+    exposed_ports:
+      - 8080
+    volumes:
+      - "{{ewe_dir}}/openwebui:/app/backend/data:rw"
+    networks:
+      - name: "{{ infra.docker.networks.apps }}"

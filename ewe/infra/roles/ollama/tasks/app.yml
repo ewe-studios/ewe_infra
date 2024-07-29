@@ -1,0 +1,26 @@
+---
+- name: create directories
+  become_user: "{{user_account}}"
+  file:
+    path: "{{ewe_dir}}/{{item}}"
+    mode: "0755"
+    state: directory
+  loop:
+    - "ollama"
+    - "ollama/data"
+    - "ollama/models"
+- name: Create a ollama docker container
+  docker_container:
+    name: "ollama_app"
+    image: "ollama/ollama:latest"
+    network_mode: bridge
+    state: started
+    recreate: no
+    restart: yes
+    restart_policy: unless-stopped
+    exposed_ports:
+      - 11434
+    volumes:
+      - "{{ewe_dir}}/ollama:/root/.ollama:rw"
+    networks:
+      - name: "{{ infra.docker.networks.apps }}"

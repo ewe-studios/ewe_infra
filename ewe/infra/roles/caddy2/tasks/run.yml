@@ -1,20 +1,27 @@
 ---
-- name: Stop caddy if already installed (its allowed to fail)
-  ansible.builtin.shell: "docker kill caddy_server"
-  ignore_errors: yes
-- name: Remove old caddy server (its allowed to fail)
-  ansible.builtin.shell: "docker rm caddy_server"
-  ignore_errors: yes
-- name: Start caddy
-  ansible.builtin.shell:
-    cmd: >
-      docker run -d 
-      -p 80:80 -p 433:433 -p 433:433/udp 
-      -v {{ewe_dir}}/caddy2/machine/Caddy.json:/etc/caddy/Caddyfile.json
-      -v {{ewe_dir}}/caddy2/machine/data:/data 
-      -v {{ewe_dir}}/caddy2/machine/config:/config
-      -v {{ewe_dir}}/caddy2/machine/sites:/srv
-      --name caddy_server
-      --restart always
-      localhost:5443/machine_caddy:{{ vps_image_version }}
-      caddy run --config /etc/caddy/Caddyfile.json --adapter json5
+- name: create standard docker network
+  docker_network:
+    name: "{{ infra.docker.networks.apps }}"
+    state: present
+    driver: bridge
+- name: Create a caddy docker container
+  docker_container:
+    name: "caddy_server"
+    image: "localhost:5443/machine_caddy:{{ vps_image_version }}"
+    command: "caddy run --config /etc/caddy/Caddyfile"
+    network_mode: bridge
+    state: started
+    recreate: no
+    restart: yes
+    restart_policy: always
+    exposed_ports:
+      - 433
+      - 80
+    volumes:
+      - "{{ewe_dir}}/openwebui:/app/backend/data:rw"
+      - "{{ewe_dir}}/caddy2/machine/Caddyfile:/etc/caddy/Caddyfile"
+      - "{{ewe_dir}}/caddy2/machine/data:/data:rw"
+      - "{{ewe_dir}}/caddy2/machine/config:/config:rw"
+      - "{{ewe_dir}}/caddy2/machine/sites:/srv:rw"
+    networks:
+      - name: "{{ infra.docker.networks.apps }}"

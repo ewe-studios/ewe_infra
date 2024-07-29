@@ -1,0 +1,4 @@
+---
+# tasks file for llamafile
+- include_tasks: network.yml
+- include_tasks: app.yml

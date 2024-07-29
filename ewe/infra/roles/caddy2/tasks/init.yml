@@ -16,11 +16,15 @@
     src: "{{role_path}}/files/{{item.src}}"
     dest: "{{ewe_dir}}/caddy2/machine/{{item.dest}}"
   with_items:
-    - { src: "Dockerfile", dest: "Dockerfile" }
+    - src: "Dockerfile"
+      dest: "Dockerfile"
+    - src: "Caddyfile"
+      dest: "Caddyfile"
 - name: Copy content as file to machine
   become_user: "{{user_account}}"
   copy:
     content: "{{caddy}}"
     dest: "{{ewe_dir}}/caddy2/machine/{{item.dest}}"
   with_items:
-    - { content: "{{caddy}}", dest: "Caddy.json" }
+    - content: "{{caddy}}"
+      dest: "Caddy.json"

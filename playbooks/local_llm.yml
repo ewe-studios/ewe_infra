@@ -2,7 +2,7 @@
 - hosts: "{{ vps_host | default('metal_servers') }}"
   gather_facts: true
   become: true
-  vars: # put your static vars here
+  vars:
     hello: world
   vars_files:
     - "{{inventory_dir}}/vars/package_vars.yml"
@@ -29,5 +29,8 @@
     - role: ewe.infra.docker_restart
     - role: ewe.infra.docker_registry
     - role: ewe.infra.caddy2
+    - role: ewe.infra.ollama
+    - role: ewe.infra.llamafile
+    - role: ewe.infra.openwebui
   tasks:
 #    - import_tasks: ../tasks/general_tasks_here.yml
