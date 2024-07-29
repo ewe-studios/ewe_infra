@@ -14,11 +14,10 @@
     image: "ghcr.io/open-webui/open-webui:main"
     state: started
     network_mode: bridge
-    recreate: no
-    restart: yes
+    recreate: yes
     env:
-      OLLAMA_BASE_URL: "http://ollama:11434"
-    restart_policy: unless-stopped
+      OLLAMA_BASE_URL: "http://ollama_app:11434"
+    restart_policy: always
     exposed_ports:
       - 8080
     volumes:

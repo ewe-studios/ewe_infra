@@ -15,9 +15,8 @@
     image: "ollama/ollama:latest"
     network_mode: bridge
     state: started
-    recreate: no
-    restart: yes
-    restart_policy: unless-stopped
+    recreate: yes
+    restart_policy: always
     exposed_ports:
       - 11434
     volumes:

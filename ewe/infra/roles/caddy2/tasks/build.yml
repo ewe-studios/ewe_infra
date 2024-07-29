@@ -1,7 +1,19 @@
 ---
 - name: Build caddy image using vps dockerfile
-  shell: "docker build -t machine_caddy:{{ vps_image_version }} -f {{ewe_dir}}/caddy2/machine/Dockerfile {{ewe_dir}}/caddy2/machine"
+  become: true
+  become_user: "{{user_account}}"
+  shell: |
+    podman build -t machine_caddy:{{ vps_image_version }} \
+    -f {{ewe_dir}}/caddy2/machine/Dockerfile \
+    {{ewe_dir}}/caddy2/machine
 - name: Tag caddy image using local docker registry
-  shell: "docker tag machine_caddy:{{ vps_image_version }} localhost:5443/machine_caddy:{{ vps_image_version }}"
+  become: true
+  become_user: "{{user_account}}"
+  shell: |
+    podman tag machine_caddy:{{ vps_image_version }} \
+    localhost:5443/machine_caddy:{{ vps_image_version }}
 - name: Push caddy image to local docker registry
-  shell: "docker push localhost:5443/machine_caddy:{{ vps_image_version }}"
+  become: true
+  become_user: "{{user_account}}"
+  shell: "podman push localhost:5443/machine_caddy:{{ vps_image_version }}"
+  ignore_errors: true

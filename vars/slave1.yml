@@ -26,7 +26,7 @@ infra:
   directory: "{{ infra_dir }}"
   docker:
     networks:
-      apps: app_network
+      apps: infra_apps
   device:
     iface: "eno1"
     router:

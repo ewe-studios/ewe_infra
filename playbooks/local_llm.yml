@@ -21,16 +21,18 @@
     - role: ewe.infra.controller_ssh
     - role: ewe.infra.kvm
     - role: ewe.infra.yq
-    - role: ewe.infra.docker
-    - role: ewe.infra.docker_compose
+    # - role: ewe.infra.docker
+    # - role: ewe.infra.docker_compose
     - role: ewe.infra.containerd
     - role: ewe.infra.firecracker
     - role: ewe.infra.iptables
-    - role: ewe.infra.docker_restart
-    - role: ewe.infra.docker_registry
+    # - role: ewe.infra.docker_restart
+    # - role: ewe.infra.docker_registry
+    # - role: ewe.infra.dockerapps
+    - role: ewe.infra.podmanapps
     - role: ewe.infra.caddy2
-    - role: ewe.infra.ollama
-    - role: ewe.infra.llamafile
-    - role: ewe.infra.openwebui
+    # - role: ewe.infra.ollama
+    # - role: ewe.infra.llamafile
+    # - role: ewe.infra.openwebui
   tasks:
 #    - import_tasks: ../tasks/general_tasks_here.yml

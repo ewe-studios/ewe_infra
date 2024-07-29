@@ -1,0 +1,43 @@
+---
+# tasks file for podmanapps
+- name: Install podman - build dependencies
+  apt:
+    update_cache: yes
+    state: present
+    pkg:
+      - crun
+      - git
+      - golang-go
+      - go-md2man
+      - iptables
+      - libassuan-dev
+      - libbtrfs-dev
+      - libc6-dev
+      - libdevmapper-dev
+      - libglib2.0-dev
+      - libgpgme-dev
+      - libgpg-error-dev
+      - libprotobuf-dev
+      - libprotobuf-c-dev
+      - libseccomp-dev
+      - libselinux1-dev
+      - libsystemd-dev
+      - pkg-config
+      - uidmap
+      - containernetworking-plugins
+      # - netavark
+      # - podmanbtrfs-progs
+- name: Install podman - ensures podman is installed
+  apt:
+    update_cache: yes
+    state: present
+    pkg:
+      - podman
+      - podman-docker
+      - cgroupfs-mount
+- name: setup infra networks for rootless podman
+  containers.podman.podman_network:
+    name: "{{ infra.docker.networks.apps }}"
+    state: present
+  become_user: "{{user_account}}"
+  become: true

@@ -1,27 +1,21 @@
 ---
-- name: create standard docker network
-  docker_network:
-    name: "{{ infra.docker.networks.apps }}"
-    state: present
-    driver: bridge
 - name: Create a caddy docker container
-  docker_container:
+  become: true
+  become_user: "{{user_account}}"
+  containers.podman.podman_container:
     name: "caddy_server"
-    image: "localhost:5443/machine_caddy:{{ vps_image_version }}"
+    image: "localhost/machine_caddy:{{ vps_image_version }}"
     command: "caddy run --config /etc/caddy/Caddyfile"
-    network_mode: bridge
     state: started
-    recreate: no
-    restart: yes
+    network: "{{ infra.docker.networks.apps }}"
+    recreate: yes
     restart_policy: always
-    exposed_ports:
-      - 433
-      - 80
+    ports:
+      - "4433:433"
+      - "4380:80"
     volumes:
       - "{{ewe_dir}}/openwebui:/app/backend/data:rw"
       - "{{ewe_dir}}/caddy2/machine/Caddyfile:/etc/caddy/Caddyfile"
       - "{{ewe_dir}}/caddy2/machine/data:/data:rw"
       - "{{ewe_dir}}/caddy2/machine/config:/config:rw"
       - "{{ewe_dir}}/caddy2/machine/sites:/srv:rw"
-    networks:
-      - name: "{{ infra.docker.networks.apps }}"

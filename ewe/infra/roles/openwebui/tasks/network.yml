@@ -1,6 +1,1 @@
 ---
-- name: create standard docker network
-  docker_network:
-    name: "{{ infra.docker.networks.apps }}"
-    state: present
-    driver: bridge
